@@ -1,4 +1,4 @@
-# 🎟️ Ticketly – Hochschulprojekt an der DHBW Heidenheim
+# 🎟️ Ticketly
 
 Ticketly ist ein Full-Stack-Projekt mit einer Angular-Frontend-Anwendung und einer NestJS-Backend-API.
 
