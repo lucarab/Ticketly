@@ -83,5 +83,5 @@ Du darfst dieses Werk ausführen, teilen, verändern und weiterverbreiten, solan
 - die Lizenz beibehältst,
 - und bei Weitergabe oder Veröffentlichung ebenfalls die AGPL-3.0 verwendest.
 
-Die AGPL-3.0 ist eine **Copyleft-Lizenz**, die sicherstellt, dass alle abgeleiteten Werke ebenfalls frei und offen bleiben – auch wenn die Software über ein Netzwerk (z. B. als Webanwendung) bereitgestellt wird.
+Die AGPL-3.0 ist eine **Copyleft-Lizenz**, die sicherstellt, dass alle abgeleiteten Werke ebenfalls frei und offen bleiben, auch wenn die Software über ein Netzwerk (z. B. als Webanwendung) bereitgestellt wird.
 
