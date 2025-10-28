@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/lucarab/Ticketly.git"
   },
-  "license": "CC-BY-NC-4.0",
+  "license": "GPL-3.0",
   "authors": [
     "Arthur Braulik",
     "Amelie Gössl",
