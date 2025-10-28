@@ -3,8 +3,6 @@
 Ticketly ist ein Full-Stack-Projekt mit einer Angular-Frontend-Anwendung und einer NestJS-Backend-API. Die Projektstruktur erlaubt es, beide Anwendungen zentral aus dem Hauptverzeichnis zu verwalten und zu starten.
 Dieses Projekt ist im Rahmen der Projektarbeit im Modul **„Web-Programmierung“** an der **Duale Hochschule Baden-Württemberg (DHBW) Heidenheim** entstanden.
 
----
-
 ## 📦 Projektstruktur
 
 ```
@@ -36,7 +34,6 @@ npm start
 - Angular-Frontend läuft unter [http://localhost:4200](http://localhost:4200)  
 - NestJS-Backend läuft unter [http://localhost:3000](http://localhost:3000)
 
----
 
 ## 🔧 Verfügbare Befehle
 
@@ -71,8 +68,6 @@ npm run test:e2e        # End-to-End-Tests
 ```bash
 npm run lint
 ```
-
----
 
 ## 👥 Autor:innen
 
