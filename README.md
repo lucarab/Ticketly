@@ -1,7 +1,22 @@
 # 🎓 Ticketly – Hochschulprojekt an der DHBW Heidenheim
 
 Ticketly ist ein Full-Stack-Projekt mit einer Angular-Frontend-Anwendung und einer NestJS-Backend-API. Die Projektstruktur erlaubt es, beide Anwendungen zentral aus dem Hauptverzeichnis zu verwalten und zu starten.
+
 Dieses Projekt ist im Rahmen der Projektarbeit im Modul **„Web-Programmierung“** an der **Duale Hochschule Baden-Württemberg (DHBW) Heidenheim** entstanden.
+
+## 🧾 Projektbeschreibung
+
+**Ticketly** ist ein Minimum Viable Product (MVP) zur digitalen Verwaltung von Tickets für **Vereine, Veranstaltungen und lokale Events**. Die Anwendung ist **kostenfrei und quelloffen (Open Source)** und richtet sich insbesondere an kleinere Organisationen, die eine einfache und effiziente Lösung zur Einlasskontrolle benötigen.
+
+### Hauptfunktionen:
+- **QR-Code-Validierung** beim Check-in
+- **Vereinfachter Check-out-Prozess** für Käufer
+- **Verwaltung von Veranstaltungen und Ticketkontingenten**
+- **Benutzerfreundliches Dashboard** für Veranstalter
+- **Modularer Aufbau** zur einfachen Erweiterung
+- **Responsives Design** für Desktop und mobile Geräte
+
+Ziel ist es, eine leicht zugängliche und datenschutzfreundliche Lösung bereitzustellen, die ohne kommerzielle Lizenzkosten auskommt und dennoch moderne Web-Technologien nutzt.
 
 ## 📦 Projektstruktur
 
@@ -77,6 +92,6 @@ npm run lint
 ## 📄 Lizenz
 
 Dieses Projekt steht unter der [Creative Commons Attribution-NonCommercial 4.0 International Lizenz (CC BY-NC 4.0)](https://creativecommons.org/licenses/by-nc/4.0/deed.de).
-Du darfst dieses Werk teilen und bearbeiten, solange du:
+Du darfst dieses Werk teilen, remixen, verändern und darauf aufbauen, solange du:
 - **Namensnennung** gibst (z. B. die Autor:innen erwähnst),
 - es **nicht kommerziell** nutzt.
