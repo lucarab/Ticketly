@@ -11,8 +11,6 @@ Dieses Projekt ist im Rahmen der Projektarbeit im Modul **„Web-Programmierung�
 └── backend/    → NestJS-API (http://localhost:3000/)
 ```
 
----
-
 ## 🚀 Einstieg
 
 ### 1. Repository klonen
@@ -75,8 +73,6 @@ npm run lint
 - Arthur Braulik  
 - Nico Knapp  
 - Amelie Gössl
-
----
 
 ## 📄 Lizenz
 
