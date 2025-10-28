@@ -1,7 +1,7 @@
 {
   "name": "ticketly",
   "version": "1.0.0",
-  "description": "",
+  "description": "Ticketly ist ein Prototyp zur digitalen Ticketverwaltung für Vereine und Events, entwickelt im Rahmen eines Hochschulprojekts an der DHBW Heidenheim.",
   "homepage": "https://github.com/lucarab/Ticketly#readme",
   "bugs": {
     "url": "https://github.com/lucarab/Ticketly/issues"
@@ -10,10 +10,13 @@
     "type": "git",
     "url": "git+https://github.com/lucarab/Ticketly.git"
   },
-  "license": "ISC",
-  "author": "Luca Rab, Arthur Braulik, Nico Knapp, Amelie Gössl",
-  "type": "commonjs",
-  "main": "index.js",
+  "license": "CC-BY-NC-4.0",
+  "authors": [
+    "Arthur Braulik",
+    "Amelie Gössl",
+    "Nico Knapp",
+    "Amelie Gössl <luca@lucarab.de>"
+  ],
   "scripts": {
     "start:frontend": "cd frontend && npm start",
     "start:backend": "cd backend && npm run start:dev",
