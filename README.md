@@ -76,12 +76,12 @@ npm run start:backend   # Startet nur das NestJS-Backend im Entwicklungsmodus
 
 ## 📄 Lizenz
 
-Dieses Projekt steht unter der [GNU General Public License v3.0 (GPL-3.0)](https://www.gnu.org/licenses/gpl-3.0.de.html).
+Dieses Projekt steht unter der [GNU Affero General Public License v3.0 (AGPL-3.0)](https://www.gnu.org/licenses/agpl-3.0.de.html).
 
 Du darfst dieses Werk ausführen, teilen, verändern und weiterverbreiten, solange du:
 - den Quellcode offenlegst,
 - die Lizenz beibehältst,
-- und bei Weitergabe oder Veröffentlichung ebenfalls die GPL-3.0 verwendest.
+- und bei Weitergabe oder Veröffentlichung ebenfalls die AGPL-3.0 verwendest.
 
-Die GPL-3.0 ist eine **Copyleft-Lizenz**, die sicherstellt, dass alle abgeleiteten Werke ebenfalls frei und offen bleiben.
+Die AGPL-3.0 ist eine **Copyleft-Lizenz**, die sicherstellt, dass alle abgeleiteten Werke ebenfalls frei und offen bleiben – auch wenn die Software über ein Netzwerk (z. B. als Webanwendung) bereitgestellt wird.
 
