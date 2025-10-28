@@ -2,7 +2,7 @@
 
 Ticketly ist ein Full-Stack-Projekt mit einer Angular-Frontend-Anwendung und einer NestJS-Backend-API.
 
-> **Hinweis:** Ticketly ist ein experimenteller Prototyp, der im Rahmen einer Hochschulprojektarbeit im Modul "Web-Programmierung" an der Duale Hochschule Baden-Württemberg (DHBW) Heidenheim entwickelt wurde. Die Anwendung dient ausschließlich Demonstrations- und Lernzwecken und ist **nicht für den produktiven Einsatz geeignet**.
+> **Hinweis:** Ticketly ist ein experimenteller Prototyp, der im Rahmen einer Hochschulprojektarbeit im Modul "Web-Programmierung" im Studiengang Wirtschaftsinformatik an der Duale Hochschule Baden-Württemberg (DHBW) entwickelt wurde. Die Anwendung dient ausschließlich Demonstrations- und Lernzwecken und ist **nicht für den produktiven Einsatz geeignet**.
 
 ## 🧾 Projektbeschreibung
 
