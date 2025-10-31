@@ -1,4 +1,5 @@
 @use "tailwindcss";
+@use 'ngx-toastr/toastr';
 
 :root {
   --primary-green: #10b981;
@@ -7,6 +8,10 @@
   --accent-green: #6ee7b7;
   --bg-green-light: #f0fdf4;
   --text-green-dark: #064e3b;
+}
+
+#toast-container > div {
+  width: 350px;
 }
 
 body {
