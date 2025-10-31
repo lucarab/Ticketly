@@ -1,0 +1,147 @@
+<section class="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-green-50">
+  <div class="absolute inset-0 opacity-5">
+    <svg class="w-full h-full" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <pattern id="about-grid" width="50" height="50" patternUnits="userSpaceOnUse">
+          <path d="M 50 0 L 0 0 0 50" fill="none" stroke="currentColor" stroke-width="1"/>
+        </pattern>
+      </defs>
+      <rect width="100%" height="100%" fill="url(#about-grid)" />
+    </svg>
+  </div>
+
+  <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-15">
+    <div class="text-center">
+      <div class="inline-flex items-center px-4 py-2 rounded-full bg-emerald-100 text-emerald-800 font-medium mb-8">
+        <ng-icon name="matFavorite" class="w-4 h-4 mr-2 text-emerald-600"></ng-icon>
+        Über Ticketly
+      </div>
+
+      <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+        Wir revolutionieren
+        <span class="gradient-text block">Event-Management</span>
+      </h1>
+      <p class="text-xl md:text-2xl text-gray-600 mb-12 max-w-4xl mx-auto leading-relaxed">
+        Ticketly wurde entwickelt, um Veranstaltern und Besuchern das bestmögliche Event-Erlebnis zu bieten. 
+        Unsere Mission ist es, Technologie zu nutzen, um Events einfacher, sicherer und erfolgreicher zu machen.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="py-12 lg:py-18 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Unsere Werte</h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Diese Prinzipien leiten uns bei allem, was wir tun
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      @for (value of values; track value.title) {
+        <div class="feature-card group">
+          <div class="w-12 h-12 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+            <ng-icon [name]="value.icon" class="!text-white" size="24"></ng-icon>
+          </div>
+          
+          <h3 class="text-xl font-semibold text-gray-900 mb-3">{{ value.title }}</h3>
+          <p class="text-gray-600 leading-relaxed">{{ value.description }}</p>
+          
+          <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-green-500/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+        </div>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="py-12 lg:py-18 bg-gradient-to-br from-emerald-50 to-green-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-12 items-center">
+      <div>
+        <div class="inline-flex items-center px-4 py-2 rounded-full bg-emerald-100 text-emerald-800 font-medium mb-6">
+          <ng-icon name="matTrendingUp" class="w-4 h-4 mr-2 text-emerald-600"></ng-icon>
+          Unsere Mission
+        </div>
+        
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+          Events für alle zugänglich machen
+        </h2>
+        
+        <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+          Wir glauben, dass großartige Events nicht kompliziert sein müssen. Deshalb haben wir Ticketly 
+          als Open-Source-Lösung entwickelt, die sowohl für kleine Community-Events als auch für große 
+          Veranstaltungen geeignet ist.
+        </p>
+        
+        <p class="text-lg text-gray-600 leading-relaxed">
+          Unser Ziel ist es, Veranstaltern die Werkzeuge an die Hand zu geben, die sie brauchen, 
+          um erfolgreiche Events zu organisieren, ohne sich um technische Hürden sorgen zu müssen.
+        </p>
+      </div>
+      
+      <div class="relative">
+        <div class="bg-white rounded-2xl p-8 shadow-xl">
+          <div class="grid grid-cols-2 gap-6">
+            <div class="text-center">
+              <div class="text-3xl font-bold text-emerald-600 mb-2">100%</div>
+              <div class="text-sm text-gray-600">Open Source</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold text-emerald-600 mb-2">0€</div>
+              <div class="text-sm text-gray-600">Grundgebühr</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold text-emerald-600 mb-2">24/7</div>
+              <div class="text-sm text-gray-600">Verfügbarkeit</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold text-emerald-600 mb-2">∞</div>
+              <div class="text-sm text-gray-600">Skalierbarkeit</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-12 lg:py-18 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-16">
+      <div class="inline-flex items-center px-4 py-2 rounded-full bg-emerald-100 text-emerald-800 font-medium mb-6">
+        <ng-icon name="matPeople" class="w-4 h-4 mr-2 text-emerald-600"></ng-icon>
+        Unser Team
+      </div>
+      
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        Leidenschaftliche Entwickler
+      </h2>
+      
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Ticketly wird von einem engagierten Team aus Entwicklern, Designern und Event-Experten entwickelt, 
+        die alle das gleiche Ziel verfolgen: Events besser zu machen.
+      </p>
+    </div>
+
+    <div class="bg-gradient-to-br from-emerald-50 to-green-50 rounded-2xl p-8 md:p-12 text-center">
+      <h3 class="text-2xl font-bold text-gray-900 mb-4">Open Source Community</h3>
+      <p class="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
+        Als Open-Source-Projekt lebt Ticketly von der Unterstützung der Community. 
+        Jeder kann beitragen und dabei helfen, die Plattform noch besser zu machen.
+      </p>
+      
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="https://github.com/ticketly" target="_blank" 
+           class="bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-4 px-8 rounded-lg border-2 border-white/20 transition-all duration-200 shadow-lg hover:shadow-xl flex items-center justify-center">
+          <ng-icon name="matStar" class="mr-2" style="color: white !important;" size="20"></ng-icon>
+          GitHub beitreten
+        </a>
+        
+        <button class="bg-white text-emerald-600 hover:bg-gray-50 font-semibold py-4 px-8 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl">
+          Dokumentation lesen
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
