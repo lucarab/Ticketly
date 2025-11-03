@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
+import { Navbar } from '../shared/navbar/navbar';
 import { 
   matPeople, 
   matLightbulb, 
@@ -11,7 +12,7 @@ import {
 
 @Component({
   selector: 'app-about',
-  imports: [NgIcon],
+  imports: [NgIcon, Navbar],
   templateUrl: './about.component.html',
   providers: [
     provideIcons({ 

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
+import { Navbar } from '../shared/navbar/navbar';
 import { 
   matQrCodeScanner, 
   matCheckCircle, 
@@ -13,7 +14,7 @@ import {
 
 @Component({
   selector: 'app-home',
-  imports: [NgIcon],
+  imports: [NgIcon, Navbar],
   templateUrl: './home.component.html',
   providers: [
     provideIcons({ 

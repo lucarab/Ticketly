@@ -4,6 +4,9 @@ import { Router, RouterLink } from '@angular/router';
 import { NgIf } from '@angular/common';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../auth/auth.service';
+import { LoginRequest } from '../auth/auth.interface';
+import { Navbar } from '../shared/navbar/navbar';
 import { 
   matEmail, 
   matLock, 
@@ -15,7 +18,7 @@ import {
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, NgIf, NgIcon, RouterLink],
+  imports: [ReactiveFormsModule, NgIf, NgIcon, RouterLink, Navbar],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   providers: [
@@ -37,7 +40,8 @@ export class LoginComponent {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private authService: AuthService
   ) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
@@ -54,48 +58,40 @@ export class LoginComponent {
     if (this.loginForm.valid) {
       this.isLoading.set(true);
       
-      // Simulate API call
-      setTimeout(() => {
-        const { email, password } = this.loginForm.value;
-        
-        // Demo credentials validation
-        const validCredentials = [
-          { email: 'admin@ticketly.com', password: 'admin123', role: 'Admin' },
-          { email: 'manager@ticketly.com', password: 'manager123', role: 'Manager' },
-          { email: 'user@ticketly.com', password: 'user123', role: 'User' }
-        ];
-        
-        const user = validCredentials.find(cred => 
-          cred.email === email && cred.password === password
-        );
-        
-        if (user) {
-          // Successful login
-          this.toastr.success(`Willkommen zurück!`, `Anmeldung als ${user.role} erfolgreich`, {
-            timeOut: 5000,
-            progressBar: true
-          });
-          setTimeout(() => {
-            this.router.navigate(['/']);
-          }, 1000);
-        } else {
-          // Failed login
+      const loginData: LoginRequest = {
+        email: this.loginForm.value.email,
+        password: this.loginForm.value.password
+      };
+
+      this.authService.login(loginData).subscribe({
+        next: (response) => {
+          this.toastr.success(
+            `Willkommen zurück, ${response.user.firstname}!`, 
+            `Anmeldung als ${response.user.role} erfolgreich`, 
+            {
+              timeOut: 5000,
+              progressBar: true
+            }
+          );
+          this.router.navigate(['/dash/home']);
+          
+          this.isLoading.set(false);
+        },
+        error: (error) => {
           this.toastr.error(
-            'Bitte überprüfen Sie Ihre Anmeldedaten und versuchen Sie es erneut.',
+            error.message,
             'Anmeldung fehlgeschlagen',
             {
               timeOut: 5000,
               progressBar: true
             }
           );
+          this.isLoading.set(false);
         }
-        
-        this.isLoading.set(false);
-      }, 1500);
+      });
     } else {
-      // Form validation errors
       this.toastr.error(
-        'Bitte füllen Sie alle Felder korrekt aus.',
+        'Bitte fülle alle Felder korrekt aus.',
         'Ungültige Eingaben',
         {
           timeOut: 5000,
@@ -112,7 +108,7 @@ export class LoginComponent {
         return `${fieldName === 'email' ? 'E-Mail-Adresse' : 'Passwort'} ist erforderlich`;
       }
       if (field.errors['email']) {
-        return 'Bitte geben Sie eine gültige E-Mail-Adresse ein';
+        return 'Bitte gebe eine gültige E-Mail-Adresse ein';
       }
       if (field.errors['minlength']) {
         return 'Passwort muss mindestens 6 Zeichen lang sein';

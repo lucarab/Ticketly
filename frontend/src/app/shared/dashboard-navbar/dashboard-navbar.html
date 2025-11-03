@@ -1,0 +1,31 @@
+<header class="bg-white shadow-sm border-b border-emerald-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-center h-16">
+      <div class="flex items-center space-x-3">
+        <div class="w-8 h-8 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-lg flex items-center justify-center shadow-lg">
+          <ng-icon name="matDashboard" class="!text-white" size="20"></ng-icon>
+        </div>
+        <span class="text-xl font-bold gradient-text">Ticketly Dashboard</span>
+      </div>
+
+      <div class="flex items-center space-x-4">
+        <div class="hidden sm:flex items-center space-x-3">
+          <div class="text-right">
+            <p class="text-sm font-medium text-gray-900">{{ user?.firstname }} {{ user?.lastname }}</p>
+            <p class="text-xs text-gray-500">{{ role }}</p>
+          </div>
+          <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
+            <ng-icon name="matPerson" class="!text-emerald-600" size="20"></ng-icon>
+          </div>
+        </div>
+
+        <button 
+          (click)="logout.emit()"
+          class="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg transition-all duration-200">
+          <ng-icon name="matLogout" size="18"></ng-icon>
+          <span class="hidden sm:inline">Abmelden</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
