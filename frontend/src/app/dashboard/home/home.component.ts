@@ -1,5 +1,6 @@
 import { Component, signal, OnInit } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
+import { RouterLink } from '@angular/router';
 import { DashboardNavbarComponent } from '../../shared/dashboard-navbar/dashboard-navbar';
 import { AuthService } from '../../auth/auth.service';
 import { UserResponse } from '../../auth/auth.interface';
@@ -16,7 +17,7 @@ import {
 
 @Component({
   selector: 'app-dashboard-home',
-  imports: [NgIcon, DashboardNavbarComponent],
+  imports: [NgIcon, RouterLink, DashboardNavbarComponent],
   templateUrl: './home.component.html',
   providers: [
     provideIcons({ 
@@ -41,10 +42,6 @@ export class HomeComponent implements OnInit {
       return;
     }
     this.currentUser.set(user);
-  }
-
-  logout(): void {
-    this.authService.logout();
   }
 
   getGreeting(): string {

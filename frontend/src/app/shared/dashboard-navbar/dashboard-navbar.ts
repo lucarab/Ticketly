@@ -1,7 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { matDashboard, matLogout, matPerson } from '@ng-icons/material-icons/baseline';
 import { UserResponse } from '../../auth/auth.interface';
+import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-dashboard-navbar',
@@ -19,5 +21,14 @@ import { UserResponse } from '../../auth/auth.interface';
 export class DashboardNavbarComponent {
   @Input() user: Partial<UserResponse> | null = null;
   @Input() role = '';
-  @Output() logout = new EventEmitter<void>();
+
+  constructor(private authService: AuthService, private toastr: ToastrService) {}
+
+  logout(): void {
+    this.toastr.success('Du hast dich erfolgreich ausgeloggt.', 'Logout erfolgreich!', {
+      timeOut: 5000,
+      progressBar: true
+    });
+    this.authService.logout();
+  }
 }

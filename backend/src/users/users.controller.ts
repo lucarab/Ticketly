@@ -30,14 +30,14 @@ export class UsersController {
   ): Promise<{ message: string }> {
     const user = req.user as User;
     await this.usersService.updatePassword(user.id, updatePasswordDto);
-    return { message: 'Password updated successfully' };
+    return { message: 'Passwort erfolgreich aktualisiert' };
   }
 
   @Delete('account')
   async deleteAccount(@Request() req): Promise<{ message: string }> {
     const user = req.user as User;
     await this.usersService.deleteUser(user.id);
-    return { message: 'Account deleted successfully' };
+    return { message: 'Konto erfolgreich gelöscht' };
   }
 
   @Get(':id')

@@ -3,16 +3,15 @@
   
   <app-dashboard-navbar 
     [user]="currentUser()" 
-    [role]="getRoleDisplayName()" 
-    (logout)="logout()">
+    [role]="getRoleDisplayName()">
   </app-dashboard-navbar>
 
   
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     
     <div class="mb-8">
-      <h1 class="text-3xl font-bold text-gray-900 mb-2">{{ getGreeting() }}</h1>
-      <p class="text-gray-600">Hier ist Ihr Dashboard-Überblick für heute.</p>
+      <h1 class="text-3xl font-bold text-gray-900">{{ getGreeting() }}</h1>
+      <p class="text-gray-600">Hier ist dein Dashboard-Überblick für heute.</p>
     </div>
 
     
@@ -112,7 +111,7 @@
       <div class="bg-white rounded-xl shadow-sm border border-emerald-100 p-6">
         <h3 class="text-lg font-semibold text-gray-900 mb-4">Schnellaktionen</h3>
         <div class="grid grid-cols-2 gap-4">
-          <button class="flex flex-col items-center justify-center p-4 bg-emerald-50 hover:bg-emerald-100 rounded-lg transition-colors group">
+          <button [routerLink]="['/dash/events/new']" class="flex flex-col items-center justify-center p-4 bg-emerald-50 hover:bg-emerald-100 rounded-lg transition-colors group">
             <ng-icon name="matEvent" class="!text-emerald-600 group-hover:!text-emerald-700 mb-2" size="24"></ng-icon>
             <span class="text-sm font-medium text-emerald-700">Neues Event</span>
           </button>
@@ -122,7 +121,7 @@
             <span class="text-sm font-medium text-blue-700">Statistiken</span>
           </button>
           
-          <button class="flex flex-col items-center justify-center p-4 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors group">
+          <button [routerLink]="['/dash/options']" class="flex flex-col items-center justify-center p-4 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors group">
             <ng-icon name="matSettings" class="!text-purple-600 group-hover:!text-purple-700 mb-2" size="24"></ng-icon>
             <span class="text-sm font-medium text-purple-700">Einstellungen</span>
           </button>

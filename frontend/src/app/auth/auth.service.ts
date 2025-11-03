@@ -162,4 +162,22 @@ export class AuthService {
     console.error('Authentication error:', error);
     return throwError(() => new Error(errorMessage));
   };
+
+  updatePassword(payload: { currentPassword: string; newPassword: string }): Observable<{ message: string }> {
+    const token = this.getToken();
+    return this.http
+      .put<{ message: string }>(`${this.API_URL}/users/password`, payload, {
+        headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+      })
+      .pipe(catchError(this.handleError));
+  }
+
+  deleteAccount(): Observable<{ message: string }> {
+    const token = this.getToken();
+    return this.http
+      .delete<{ message: string }>(`${this.API_URL}/users/account`, {
+        headers: token ? { Authorization: `Bearer ${token}` } : undefined,
+      })
+      .pipe(catchError(this.handleError));
+  }
 }
