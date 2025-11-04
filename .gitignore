@@ -14,7 +14,6 @@ data.sqlite3
 /frontend/.vscode
 /frontend/.prettierrc.json
 /frontend/.editorconfig
-/frontend/.postcssrc.json
 /backend/node_modules
 /node_modules
 logs
