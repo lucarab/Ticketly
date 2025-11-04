@@ -78,6 +78,40 @@ export class NewEventComponent implements OnInit {
     });
   }
 
+  hasFieldError(fieldName: string): boolean {
+    const field = this.form?.get(fieldName);
+    return !!(field?.errors && field.touched);
+  }
+
+  getFieldError(fieldName: string): string {
+    const field = this.form?.get(fieldName);
+    if (field?.errors && field.touched) {
+      if (fieldName === 'name') {
+        if (field.errors['required']) return 'Name ist erforderlich';
+        if (field.errors['minlength']) return 'Name muss mindestens 3 Zeichen lang sein';
+      }
+      if (fieldName === 'location') {
+        if (field.errors['required']) return 'Ort ist erforderlich';
+        if (field.errors['minlength']) return 'Ort muss mindestens 2 Zeichen lang sein';
+      }
+      if (fieldName === 'datetime') {
+        if (field.errors['required']) return 'Datum & Zeit sind erforderlich';
+      }
+      if (fieldName === 'price') {
+        if (field.errors['required']) return 'Preis ist erforderlich';
+        if (field.errors['pattern']) return 'Preis muss im Format 0.00 angegeben werden';
+      }
+      if (fieldName === 'maxTicketAmount') {
+        if (field.errors['required']) return 'Max. Tickets sind erforderlich';
+        if (field.errors['min']) return 'Es muss mindestens 1 Ticket erlaubt sein';
+      }
+      if (fieldName === 'status') {
+        if (field.errors['required']) return 'Status ist erforderlich';
+      }
+    }
+    return '';
+  }
+
   getRoleDisplayName(): string {
     const user = this.authService.getCurrentUser();
     const role = user?.role?.toLowerCase();

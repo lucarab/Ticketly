@@ -23,8 +23,7 @@ export const routes: Routes = [
     path: 'dash/options',
     loadComponent: () => import('./dashboard/options/options.component').then(m => m.OptionsComponent),
     canActivate: [AuthGuard]
-  }
-  ,
+  },
   {
     path: 'dash/events/new',
     loadComponent: () => import('./dashboard/events/new-event.component').then(m => m.NewEventComponent),

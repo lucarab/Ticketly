@@ -105,4 +105,51 @@ export class OptionsComponent implements OnInit {
       }
     });
   }
+
+  hasPasswordFieldError(fieldName: string): boolean {
+    const field = this.passwordForm?.get(fieldName);
+    return !!(field?.errors && field.touched);
+  }
+
+  getPasswordFieldError(fieldName: string): string {
+    const field = this.passwordForm?.get(fieldName);
+    if (field?.errors && field.touched) {
+      if (field.errors['required']) {
+        switch (fieldName) {
+          case 'currentPassword': return 'Aktuelles Passwort ist erforderlich';
+          case 'newPassword': return 'Neues Passwort ist erforderlich';
+          case 'confirmPassword': return 'Neues Passworts ist erforderlich';
+        }
+      }
+      if (field.errors['minlength']) {
+        return 'Passwort muss mindestens 6 Zeichen lang sein';
+      }
+      if (fieldName === 'confirmPassword') {
+        const newPassword = this.passwordForm?.get('newPassword')?.value;
+        const confirmPassword = field.value;
+        if (newPassword && confirmPassword && newPassword !== confirmPassword) {
+          return 'Die neuen Passwörter stimmen nicht überein';
+        }
+      }
+    }
+    return '';
+  }
+
+  hasDeleteFieldError(fieldName: string): boolean {
+    const field = this.deleteForm?.get(fieldName);
+    return !!(field?.errors && field.touched);
+  }
+
+  getDeleteFieldError(fieldName: string): string {
+    const field = this.deleteForm?.get(fieldName);
+    if (field?.errors && field.touched) {
+      if (field.errors['required']) {
+        return 'Bestätigung ist erforderlich';
+      }
+      if (field.errors['pattern']) {
+        return 'Bitte gib „LÖSCHEN” zur Bestätigung ein';
+      }
+    }
+    return '';
+  }
 }

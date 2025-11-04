@@ -21,25 +21,3 @@ input:focus {
 .animate-spin {
   animation: spin 1s linear infinite;
 }
-
-button:hover:not(:disabled) {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
-}
-
-// Error state animations
-.border-red-300 {
-  animation: shake 0.5s ease-in-out;
-}
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-5px); }
-  75% { transform: translateX(5px); }
-}
-
-@media (max-width: 640px) {
-  .max-w-md {
-    margin: 1rem;
-  }
-}

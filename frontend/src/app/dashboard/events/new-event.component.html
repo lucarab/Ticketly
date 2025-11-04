@@ -18,44 +18,45 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="bg-white rounded-xl shadow-sm border border-emerald-100 p-6 space-y-6">
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Event-Name</label>
-        <input formControlName="name" type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all" placeholder="z.B. Sommerkonzert" />
-        <div class="text-sm text-red-600 mt-1" *ngIf="form.get('name')?.touched && form.get('name')?.invalid">Bitte einen gültigen Namen eingeben.</div>
+        <input formControlName="name" type="text" [class]="'w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all ' + (hasFieldError('name') ? 'border-red-300 bg-red-50' : 'border-gray-300')" placeholder="z.B. Sommerkonzert" />
+        <div class="text-sm text-red-600 mt-1" *ngIf="hasFieldError('name')">{{ getFieldError('name') }}</div>
       </div>
 
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Ort</label>
-        <input formControlName="location" type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all" placeholder="z.B. Berlin Arena" />
-        <div class="text-sm text-red-600 mt-1" *ngIf="form.get('location')?.touched && form.get('location')?.invalid">Bitte einen gültigen Ort eingeben.</div>
+        <input formControlName="location" type="text" [class]="'w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all ' + (hasFieldError('location') ? 'border-red-300 bg-red-50' : 'border-gray-300')" placeholder="z.B. Berlin Arena" />
+        <div class="text-sm text-red-600 mt-1" *ngIf="hasFieldError('location')">{{ getFieldError('location') }}</div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Datum & Zeit</label>
-          <input formControlName="datetime" type="datetime-local" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all" />
-          <div class="text-sm text-red-600 mt-1" *ngIf="form.get('datetime')?.touched && form.get('datetime')?.invalid">Bitte Datum und Zeit eingeben.</div>
+          <input formControlName="datetime" type="datetime-local" [class]="'w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all ' + (hasFieldError('datetime') ? 'border-red-300 bg-red-50' : 'border-gray-300')" />
+          <div class="text-sm text-red-600 mt-1" *ngIf="hasFieldError('datetime')">{{ getFieldError('datetime') }}</div>
         </div>
 
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Preis (€)</label>
-          <input formControlName="price" type="text" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all" placeholder="z.B. 19.99" />
-          <div class="text-sm text-red-600 mt-1" *ngIf="form.get('price')?.touched && form.get('price')?.invalid">Bitte einen gültigen Preis eingeben.</div>
+          <input formControlName="price" type="text" [class]="'w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all ' + (hasFieldError('price') ? 'border-red-300 bg-red-50' : 'border-gray-300')" placeholder="z.B. 19.99" />
+          <div class="text-sm text-red-600 mt-1" *ngIf="hasFieldError('price')">{{ getFieldError('price') }}</div>
         </div>
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Max. Tickets</label>
-          <input formControlName="maxTicketAmount" type="number" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all" min="1" />
-          <div class="text-sm text-red-600 mt-1" *ngIf="form.get('maxTicketAmount')?.touched && form.get('maxTicketAmount')?.invalid">Bitte eine gültige Ticketanzahl eingeben.</div>
+          <input formControlName="maxTicketAmount" type="number" [class]="'w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all ' + (hasFieldError('maxTicketAmount') ? 'border-red-300 bg-red-50' : 'border-gray-300')" min="1" />
+          <div class="text-sm text-red-600 mt-1" *ngIf="hasFieldError('maxTicketAmount')">{{ getFieldError('maxTicketAmount') }}</div>
         </div>
 
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
-          <select formControlName="status" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all">
+          <select formControlName="status" [class]="'w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all ' + (hasFieldError('status') ? 'border-red-300 bg-red-50' : 'border-gray-300')">
             <option value="draft">Entwurf</option>
             <option value="published">Veröffentlicht</option>
             <option value="canceled">Abgesagt</option>
           </select>
+          <div class="text-sm text-red-600 mt-1" *ngIf="hasFieldError('status')">{{ getFieldError('status') }}</div>
         </div>
       </div>
 
