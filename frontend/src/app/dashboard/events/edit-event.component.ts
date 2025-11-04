@@ -1,7 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { matEvent, matSave, matSync, matArrowBack } from '@ng-icons/material-icons/baseline';
 import { ToastrService } from 'ngx-toastr';
@@ -11,24 +11,27 @@ import { UserResponse } from '../../auth/auth.interface';
 import { EventsService } from '../../events/events.service';
 
 @Component({
-  selector: 'app-new-event',
+  selector: 'app-edit-event',
   imports: [ReactiveFormsModule, NgIf, RouterLink, NgIcon, DashboardNavbarComponent],
-  templateUrl: './new-event.component.html',
+  templateUrl: './edit-event.component.html',
   providers: [
     provideIcons({ matEvent, matSave, matSync, matArrowBack })
   ]
 })
-export class NewEventComponent implements OnInit {
+export class EditEventComponent implements OnInit {
   currentUser = signal<UserResponse>({} as UserResponse);
   form!: FormGroup;
   saving = false;
+  loading = true;
+  eventId!: number;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private toastr: ToastrService,
+    private route: ActivatedRoute,
     public authService: AuthService,
-    private eventsService: EventsService
+    private eventsService: EventsService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -43,10 +46,36 @@ export class NewEventComponent implements OnInit {
       name: ['', [Validators.required, Validators.minLength(3)]],
       location: ['', [Validators.required, Validators.minLength(2)]],
       datetime: ['', [Validators.required]],
-      price: ['0.00', [Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/)]],
+      price: ['', [Validators.required]],
       maxTicketAmount: [1, [Validators.required, Validators.min(1)]],
       description: [''],
       status: ['draft', [Validators.required]]
+    });
+
+    this.eventId = Number(this.route.snapshot.paramMap.get('id'));
+    if (!this.eventId) {
+      this.toastr.error('Ungültige Event-ID.', 'Fehler');
+      this.router.navigate(['/dash/events']);
+      return;
+    }
+
+    this.eventsService.getEventById(this.eventId).subscribe({
+      next: (event) => {
+        this.form.patchValue({
+          name: event?.name ?? '',
+          location: event?.location ?? '',
+          datetime: event?.datetime ? new Date(event.datetime).toISOString().slice(0,16) : '',
+          price: event?.price ?? '',
+          maxTicketAmount: event?.maxTicketAmount ?? 1,
+          description: event?.description ?? '',
+          status: event?.status ?? 'draft'
+        });
+        this.loading = false;
+      },
+      error: (err) => {
+        this.toastr.error(err.message || 'Event konnte nicht geladen werden.', 'Fehler');
+        this.loading = false;
+      }
     });
   }
 
@@ -60,56 +89,36 @@ export class NewEventComponent implements OnInit {
     const payload = {
       name: value.name,
       location: value.location,
-      datetime: new Date(value.datetime).toISOString(),
+      datetime: value.datetime ? new Date(value.datetime).toISOString() : undefined,
       price: value.price,
       maxTicketAmount: value.maxTicketAmount,
       description: value.description,
       status: value.status
     };
-    this.eventsService.createEvent(payload).subscribe({
+    this.eventsService.updateEvent(this.eventId, payload).subscribe({
       next: () => {
-        this.toastr.success('Event wurde erfolgreich erstellt.', 'Erfolg');
-        this.router.navigate(['/dash/home']);
+        this.toastr.success('Event wurde aktualisiert.', 'Erfolg');
+        this.router.navigate(['/dash/events']);
       },
       error: (err) => {
-        this.toastr.error(err.message || 'Event konnte nicht erstellt werden.', 'Fehler');
+        this.toastr.error(err.message || 'Event konnte nicht aktualisiert werden.', 'Fehler');
         this.saving = false;
       }
     });
   }
 
-  hasFieldError(fieldName: string): boolean {
-    const field = this.form?.get(fieldName);
-    return !!(field?.errors && field.touched);
+  hasFieldError(field: string): boolean {
+    const control = this.form.get(field);
+    return !!control && control.invalid && (control.dirty || control.touched);
   }
 
-  getFieldError(fieldName: string): string {
-    const field = this.form?.get(fieldName);
-    if (field?.errors && field.touched) {
-      if (fieldName === 'name') {
-        if (field.errors['required']) return 'Name ist erforderlich';
-        if (field.errors['minlength']) return 'Name muss mindestens 3 Zeichen lang sein';
-      }
-      if (fieldName === 'location') {
-        if (field.errors['required']) return 'Ort ist erforderlich';
-        if (field.errors['minlength']) return 'Ort muss mindestens 2 Zeichen lang sein';
-      }
-      if (fieldName === 'datetime') {
-        if (field.errors['required']) return 'Datum & Zeit sind erforderlich';
-      }
-      if (fieldName === 'price') {
-        if (field.errors['required']) return 'Preis ist erforderlich';
-        if (field.errors['pattern']) return 'Preis muss im Format 0.00 angegeben werden';
-      }
-      if (fieldName === 'maxTicketAmount') {
-        if (field.errors['required']) return 'Max. Tickets sind erforderlich';
-        if (field.errors['min']) return 'Es muss mindestens 1 Ticket erlaubt sein';
-      }
-      if (fieldName === 'status') {
-        if (field.errors['required']) return 'Status ist erforderlich';
-      }
-    }
-    return '';
+  getFieldError(field: string): string {
+    const control = this.form.get(field);
+    if (!control) return '';
+    if (control.hasError('required')) return 'Dieses Feld ist erforderlich.';
+    if (control.hasError('minlength')) return 'Eingabe ist zu kurz.';
+    if (control.hasError('min')) return 'Der Wert ist zu niedrig.';
+    return 'Ungültige Eingabe.';
   }
 
   getRoleDisplayName(): string {

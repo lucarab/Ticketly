@@ -25,8 +25,18 @@ export const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: 'dash/events',
+    loadComponent: () => import('./dashboard/events/events-list.component').then(m => m.EventsListComponent),
+    canActivate: [AuthGuard]
+  },
+  {
     path: 'dash/events/new',
     loadComponent: () => import('./dashboard/events/new-event.component').then(m => m.NewEventComponent),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'dash/events/edit/:id',
+    loadComponent: () => import('./dashboard/events/edit-event.component').then(m => m.EditEventComponent),
     canActivate: [AuthGuard]
   }
 ];

@@ -8,11 +8,12 @@
     <div class="flex items-center justify-between mb-6">
       <h1 class="text-2xl font-bold text-gray-900 flex items-center gap-2">
         <ng-icon name="matEvent" class="!text-emerald-600" size="24"></ng-icon>
-        Neues Event erstellen
+        Event erstellen
       </h1>
-      <a [routerLink]="['/dash/home']" class="inline-flex items-center px-3 py-2 rounded-md bg-white hover:bg-gray-100 border border-gray-200 transition-colors">
-        Zurück zum Dashboard
-      </a>
+        <a [routerLink]="['/dash/events']" class="inline-flex items-center px-3 py-2 rounded-md bg-white hover:bg-gray-100 border border-gray-200 transition-colors">
+          <ng-icon name="matArrowBack" size="18" class="mr-2"></ng-icon>
+          Zurück zur Übersicht
+        </a>
     </div>
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="bg-white rounded-xl shadow-sm border border-emerald-100 p-6 space-y-6">

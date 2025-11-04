@@ -4,6 +4,10 @@ import { RouterLink } from '@angular/router';
 import { DashboardNavbarComponent } from '../../shared/dashboard-navbar/dashboard-navbar';
 import { AuthService } from '../../auth/auth.service';
 import { UserResponse } from '../../auth/auth.interface';
+import { UsersService } from '../../users/users.service';
+import { EventsService } from '../../events/events.service';
+import { TicketsService } from '../../tickets/tickets.service';
+
 import { 
   matDashboard,
   matLogout,
@@ -11,7 +15,7 @@ import {
   matEvent,
   matAnalytics,
   matSettings,
-  matNotifications,
+  matLocalActivity,
   matBarChart
 } from '@ng-icons/material-icons/baseline';
 
@@ -27,14 +31,24 @@ import {
       matEvent,
       matAnalytics,
       matSettings,
-      matNotifications,
+      matLocalActivity,
       matBarChart
     })
   ]
 })
 export class HomeComponent implements OnInit {
   currentUser = signal<UserResponse>({} as UserResponse);
-  constructor(private authService: AuthService) {}
+  usersCount = signal<number>(0);
+  eventsCount = signal<number>(0);
+  ticketsCount = signal<number>(0);
+  publishedEventsCount = signal<number>(0);
+
+  constructor(
+    private authService: AuthService,
+    private usersService: UsersService,
+    private eventsService: EventsService,
+    private ticketsService: TicketsService
+  ) {}
   ngOnInit(): void {
     const user = this.authService.getCurrentUser();
     if (!user) {
@@ -42,6 +56,26 @@ export class HomeComponent implements OnInit {
       return;
     }
     this.currentUser.set(user);
+
+    this.usersService.getUsersCount().subscribe({
+      next: (count) => this.usersCount.set(count),
+      error: (err) => console.error('Fehler beim Laden der Benutzeranzahl:', err)
+    });
+
+    this.eventsService.getEventsCount().subscribe({
+      next: (count) => this.eventsCount.set(count),
+      error: (err) => console.error('Fehler beim Laden der Eventanzahl:', err)
+    });
+
+    this.eventsService.getPublishedEventsCount().subscribe({
+      next: (count) => this.publishedEventsCount.set(count),
+      error: (err) => console.error('Fehler beim Laden der aktiven Events:', err)
+    });
+
+    this.ticketsService.getTicketsCount().subscribe({
+      next: (count) => this.ticketsCount.set(count),
+      error: (err) => console.error('Fehler beim Laden der Ticketanzahl:', err)
+    });
   }
 
   getGreeting(): string {
