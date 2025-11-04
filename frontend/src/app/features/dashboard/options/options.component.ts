@@ -1,12 +1,12 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { DashboardNavbarComponent } from '../../shared/dashboard-navbar/dashboard-navbar.component';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserResponse } from '../../../models/user.model';
-import { matSettings, matArrowBack } from '@ng-icons/material-icons/baseline';
+import { matArrowBack, matSettings } from '@ng-icons/material-icons/baseline';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -22,11 +22,11 @@ import { ToastrService } from 'ngx-toastr';
   ]
 })
 export class OptionsComponent implements OnInit {
-  currentUser = signal<UserResponse>({} as UserResponse);
+  readonly currentUser = signal<UserResponse>({} as UserResponse);
   passwordForm!: FormGroup;
   deleteForm!: FormGroup;
-  isSavingPassword = signal(false);
-  isDeleting = signal(false);
+  readonly isSavingPassword = signal(false);
+  readonly isDeleting = signal(false);
 
   constructor(private authService: AuthService, private fb: FormBuilder, private toastr: ToastrService) {}
 

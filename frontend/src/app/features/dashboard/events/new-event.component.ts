@@ -1,8 +1,8 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { matEvent, matSave, matSync, matArrowBack } from '@ng-icons/material-icons/baseline';
+import { matArrowBack, matEvent, matSave, matSync } from '@ng-icons/material-icons/baseline';
 import { ToastrService } from 'ngx-toastr';
 import { DashboardNavbarComponent } from '../../shared/dashboard-navbar/dashboard-navbar.component';
 import { AuthService } from '../../../services/auth/auth.service';
@@ -18,7 +18,7 @@ import { EventsService } from '../../../services/events/events.service';
   ]
 })
 export class NewEventComponent implements OnInit {
-  currentUser = signal<UserResponse>({} as UserResponse);
+  readonly currentUser = signal<UserResponse>({} as UserResponse);
   form!: FormGroup;
   saving = false;
 
@@ -87,26 +87,26 @@ export class NewEventComponent implements OnInit {
     const field = this.form?.get(fieldName);
     if (field?.errors && field.touched) {
       if (fieldName === 'name') {
-        if (field.errors['required']) return 'Name ist erforderlich';
-        if (field.errors['minlength']) return 'Name muss mindestens 3 Zeichen lang sein';
+        if (field.errors['required']) {return 'Name ist erforderlich';}
+        if (field.errors['minlength']) {return 'Name muss mindestens 3 Zeichen lang sein';}
       }
       if (fieldName === 'location') {
-        if (field.errors['required']) return 'Ort ist erforderlich';
-        if (field.errors['minlength']) return 'Ort muss mindestens 2 Zeichen lang sein';
+        if (field.errors['required']) {return 'Ort ist erforderlich';}
+        if (field.errors['minlength']) {return 'Ort muss mindestens 2 Zeichen lang sein';}
       }
       if (fieldName === 'datetime') {
-        if (field.errors['required']) return 'Datum & Zeit sind erforderlich';
+        if (field.errors['required']) {return 'Datum & Zeit sind erforderlich';}
       }
       if (fieldName === 'price') {
-        if (field.errors['required']) return 'Preis ist erforderlich';
-        if (field.errors['pattern']) return 'Preis muss im Format 0.00 angegeben werden';
+        if (field.errors['required']) {return 'Preis ist erforderlich';}
+        if (field.errors['pattern']) {return 'Preis muss im Format 0.00 angegeben werden';}
       }
       if (fieldName === 'maxTicketAmount') {
-        if (field.errors['required']) return 'Max. Tickets sind erforderlich';
-        if (field.errors['min']) return 'Es muss mindestens 1 Ticket erlaubt sein';
+        if (field.errors['required']) {return 'Max. Tickets sind erforderlich';}
+        if (field.errors['min']) {return 'Es muss mindestens 1 Ticket erlaubt sein';}
       }
       if (fieldName === 'status') {
-        if (field.errors['required']) return 'Status ist erforderlich';
+        if (field.errors['required']) {return 'Status ist erforderlich';}
       }
     }
     return '';

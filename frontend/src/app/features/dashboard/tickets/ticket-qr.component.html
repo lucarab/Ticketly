@@ -1,17 +1,16 @@
 <div>
   <app-dashboard-navbar 
-    [user]="currentUser()" 
-    [role]="getRoleDisplayName()">
-  </app-dashboard-navbar>
+    [role]="getRoleDisplayName()" 
+    [user]="currentUser()" />
 
   <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="flex items-center justify-between mb-6">
       <h1 class="text-2xl font-bold text-gray-900 flex items-center gap-2">
-        <ng-icon name="matLocalActivity" class="!text-emerald-600" size="24"></ng-icon>
+        <ng-icon class="!text-emerald-600" name="matLocalActivity" size="24" />
         Ticket QR-Code
       </h1>
-      <a [routerLink]="['/dash/tickets']" class="inline-flex items-center px-3 py-2 rounded-md bg-white hover:bg-gray-100 border border-gray-200 transition-colors">
-        <ng-icon name="matArrowBack" size="18" class="mr-2"></ng-icon>
+      <a class="inline-flex items-center px-3 py-2 rounded-md bg-white hover:bg-gray-100 border border-gray-200 transition-colors" [routerLink]="['/dash/tickets']">
+        <ng-icon class="mr-2" name="matArrowBack" size="18" />
         Zurück zur Übersicht
       </a>
     </div>
@@ -29,9 +28,9 @@
 
       <div class="flex items-center justify-center">
         <div class="w-[320px] h-[320px] flex items-center justify-center border border-gray-200 rounded-lg">
-          @if (qrDataUrl()) { <img [src]="qrDataUrl()" alt="Ticket QR" class="block w-[300px] h-[300px]" /> }
+          @if (qrDataUrl()) { <img alt="Ticket QR" class="block w-[300px] h-[300px]" [src]="qrDataUrl()" /> }
           @if (!qrDataUrl()) {
-            <ng-icon name="matSync" class="animate-spin mr-2" size="18"></ng-icon>
+            <ng-icon class="animate-spin mr-2" name="matSync" size="18" />
             QR-Code wird erzeugt...
           }
         </div>

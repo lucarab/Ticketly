@@ -1,14 +1,14 @@
 <div class="min-h-screen bg-gradient-to-br from-emerald-50 to-teal-50">
-  <app-dashboard-navbar [user]="currentUser()" [role]="getRoleDisplayName()"></app-dashboard-navbar>
+  <app-dashboard-navbar [role]="getRoleDisplayName()" [user]="currentUser()" />
 
   <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="flex items-center justify-between mb-6">
       <h1 class="text-2xl font-bold text-gray-900 flex items-center gap-2">
-        <ng-icon name="matQrCodeScanner" class="!text-emerald-600" size="24"></ng-icon>
+        <ng-icon class="!text-emerald-600" name="matQrCodeScanner" size="24" />
         Ticketscanner
       </h1>
-      <a [routerLink]="['/dash/tickets']" class="inline-flex items-center px-3 py-2 rounded-md bg-white hover:bg-gray-100 border border-gray-200 transition-colors">
-        <ng-icon name="matArrowBack" size="18" class="mr-2"></ng-icon>
+      <a class="inline-flex items-center px-3 py-2 rounded-md bg-white hover:bg-gray-100 border border-gray-200 transition-colors" [routerLink]="['/dash/tickets']">
+        <ng-icon class="mr-2" name="matArrowBack" size="18" />
         Zurück zur Übersicht
       </a>
     </div>
@@ -17,20 +17,20 @@
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <div class="aspect-video bg-gray-900 rounded-lg overflow-hidden flex items-center justify-center">
-            <video #preview class="w-full h-full" playsinline muted></video>
+            <video #preview class="w-full h-full" muted playsinline></video>
           </div>
           <div class="mt-3 text-sm text-gray-600">
             @if (scanning()) {
               <span class="inline-flex items-center">
-                <ng-icon name="matSync" class="animate-spin mr-2" size="18"></ng-icon>
+                <ng-icon class="animate-spin mr-2" name="matSync" size="18" />
                 Kamera aktiv.Scanne QR-Code…
               </span>
             }
             @if (!scanning() && resultValid() === null) { <span>Kamera inaktiv.</span> }
           </div>
           <div class="mt-4">
-            <button (click)="restart()" class="inline-flex items-center px-4 py-2 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white transition-colors">
-              <ng-icon name="matSync" size="18" class="mr-2"></ng-icon>
+            <button class="inline-flex items-center px-4 py-2 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white transition-colors" (click)="restart()">
+              <ng-icon class="mr-2" name="matSync" size="18" />
               Scanner neu starten
             </button>
           </div>
@@ -40,7 +40,7 @@
           @if (resultValid() === true) {
           <div class="p-4 border border-emerald-200 bg-emerald-50 rounded-lg">
             <div class="flex items-center text-emerald-700 font-bold">
-              <ng-icon name="matCheckCircle" size="20" class="mr-2"></ng-icon>
+              <ng-icon class="mr-2" name="matCheckCircle" size="20" />
               Ticket gültig und als verwendet markiert.
             </div>
             <div class="mt-2 text-sm text-gray-600">Ticket-UUID: <span class="font-mono">{{ scannedUuid() }}</span></div>
@@ -49,7 +49,7 @@
           @if (resultValid() === false) {
           <div class="p-4 border border-red-200 bg-red-50 rounded-lg">
             <div class="flex items-center text-red-700">
-              <ng-icon name="matErrorOutline" size="20" class="mr-2"></ng-icon>
+              <ng-icon class="mr-2" name="matErrorOutline" size="20" />
               <strong class="mr-1">Ticket ungültig:</strong>{{ resultReason() === 'already_used' ? 'Bereits verwendet' : resultReason() === 'not_found' ? 'Nicht gefunden' : resultReason() === 'invalid_format' ? 'Falsches Format' : 'Kamera nicht verfügbar' }}
             </div>
             @if (scannedUuid()) { <div class="mt-2 text-sm text-gray-600">UUID: <span class="font-mono">{{ scannedUuid() }}</span></div> }
@@ -65,14 +65,14 @@
             <p class="text-xs text-gray-600 mb-2">Falls keine Webcam zur Verfügung steht, da lokal und kein Smartphone</p>
             <div class="flex items-center gap-2">
               <input
+                class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all border-gray-300"
+                placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
                 type="text"
                 [value]="manualUuid()"
                 (input)="manualUuid.set($any($event.target).value)"
-                placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
-                class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all border-gray-300"
               />
-              <button type="button" (click)="onManualSubmit()" class="inline-flex items-center px-3 py-2 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white transition-colors">
-                <ng-icon name="matCheckCircle" size="18" class="mr-2"></ng-icon>
+              <button class="inline-flex items-center px-3 py-2 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white transition-colors" type="button" (click)="onManualSubmit()">
+                <ng-icon class="mr-2" name="matCheckCircle" size="18" />
                 Prüfen
               </button>
             </div>

@@ -2,7 +2,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { matPerson, matEdit, matDelete, matArrowBack } from '@ng-icons/material-icons/baseline';
+import { matArrowBack, matDelete, matEdit, matPerson } from '@ng-icons/material-icons/baseline';
 import { DashboardNavbarComponent } from '../../shared/dashboard-navbar/dashboard-navbar.component';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserResponse } from '../../../models/user.model';
@@ -18,9 +18,9 @@ import { ToastrService } from 'ngx-toastr';
   ]
 })
 export class UsersListComponent implements OnInit {
-  currentUser = signal<UserResponse>({} as UserResponse);
-  users = signal<UserResponse[]>([]);
-  loading = signal<boolean>(false);
+  readonly currentUser = signal<UserResponse>({} as UserResponse);
+  readonly users = signal<UserResponse[]>([]);
+  readonly loading = signal<boolean>(false);
 
   constructor(
     private authService: AuthService,
@@ -55,7 +55,7 @@ export class UsersListComponent implements OnInit {
   onDelete(user: UserResponse): void {
     const fullName = `${user?.firstname ?? ''} ${user?.lastname ?? ''}`.trim() || 'Benutzer';
     const confirmed = confirm(`Möchtest du "${fullName}" wirklich löschen?`);
-    if (!confirmed) return;
+    if (!confirmed) {return;}
     this.usersService.deleteUser(user.id as number).subscribe({
       next: () => {
         this.toastr.success(`"${fullName}" wurde gelöscht.`, 'Benutzer gelöscht');

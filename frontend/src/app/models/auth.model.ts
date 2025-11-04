@@ -1,23 +1,23 @@
 import { UserResponse } from './user.model';
 
-export interface LoginRequest {
+export type LoginRequest = {
   email: string;
   password: string;
 }
 
-export interface RegisterRequest {
+export type RegisterRequest = {
   firstname: string;
   lastname: string;
   email: string;
   password: string;
 }
 
-export interface LoginResponse {
+export type LoginResponse = {
   user: UserResponse;
   access_token: string;
 }
 
-export interface AuthState {
+export type AuthState = {
   isAuthenticated: boolean;
   user: UserResponse | null;
   token: string | null;

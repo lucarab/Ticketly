@@ -1,17 +1,16 @@
 <div class="min-h-screen bg-gradient-to-br from-emerald-50 to-teal-50">
   <app-dashboard-navbar 
-    [user]="currentUser()" 
-    [role]="getRoleDisplayName()">
-  </app-dashboard-navbar>
+    [role]="getRoleDisplayName()" 
+    [user]="currentUser()" />
 
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="flex items-center justify-between mb-6">
       <h1 class="text-2xl font-bold text-gray-900 flex items-center gap-2">
-        <ng-icon name="matPerson" class="!text-emerald-600" size="24"></ng-icon>
+        <ng-icon class="!text-emerald-600" name="matPerson" size="24" />
         Benutzer
       </h1>
-      <a [routerLink]="['/dash/home']" class="inline-flex items-center px-3 py-2 rounded-md bg-white hover:bg-gray-100 border border-gray-200 transition-colors">
-        <ng-icon name="matArrowBack" size="18" class="mr-2"></ng-icon>
+      <a class="inline-flex items-center px-3 py-2 rounded-md bg-white hover:bg-gray-100 border border-gray-200 transition-colors" [routerLink]="['/dash/home']">
+        <ng-icon class="mr-2" name="matArrowBack" size="18" />
         Zurück zum Dashboard
       </a>
     </div>
@@ -50,12 +49,12 @@
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
-                      [class.bg-green-100]="(u?.role || '').toLowerCase() === 'admin'"
-                      [class.text-green-800]="(u?.role || '').toLowerCase() === 'admin'"
                       [class.bg-blue-100]="(u?.role || '').toLowerCase() === 'manager'"
-                      [class.text-blue-800]="(u?.role || '').toLowerCase() === 'manager'"
                       [class.bg-gray-100]="(u?.role || '').toLowerCase() === 'user'"
-                      [class.text-gray-800]="(u?.role || '').toLowerCase() === 'user'">
+                      [class.bg-green-100]="(u?.role || '').toLowerCase() === 'admin'"
+                      [class.text-blue-800]="(u?.role || '').toLowerCase() === 'manager'"
+                      [class.text-gray-800]="(u?.role || '').toLowerCase() === 'user'"
+                      [class.text-green-800]="(u?.role || '').toLowerCase() === 'admin'">
                   {{ u?.role || '-' }}
                 </span>
               </td>
@@ -64,14 +63,14 @@
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                 @if (isAdmin()) {
-                  <a [routerLink]="['/dash/users/edit', u.id]"
-                     class="inline-flex items-center px-3 py-1 mr-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white transition-colors">
-                    <ng-icon name="matEdit" size="18" class="mr-1 !text-white"></ng-icon>
+                  <a class="inline-flex items-center px-3 py-1 mr-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white transition-colors"
+                     [routerLink]="['/dash/users/edit', u.id]">
+                    <ng-icon class="mr-1 !text-white" name="matEdit" size="18" />
                     Bearbeiten
                   </a>
-                  <button (click)="onDelete(u)"
-                          class="inline-flex items-center px-3 py-1 rounded-md bg-red-600 hover:bg-red-700 text-white transition-colors">
-                    <ng-icon name="matDelete" size="18" class="mr-1 !text-white"></ng-icon>
+                  <button class="inline-flex items-center px-3 py-1 rounded-md bg-red-600 hover:bg-red-700 text-white transition-colors"
+                          (click)="onDelete(u)">
+                    <ng-icon class="mr-1 !text-white" name="matDelete" size="18" />
                     Löschen
                   </button>
                 }
@@ -80,7 +79,7 @@
             }
             @if (!loading() && users().length === 0) {
               <tr>
-                <td colspan="6" class="px-6 py-8 text-center text-gray-500">Keine Benutzer gefunden.</td>
+                <td class="px-6 py-8 text-center text-gray-500" colspan="6">Keine Benutzer gefunden.</td>
               </tr>
             }
           </tbody>

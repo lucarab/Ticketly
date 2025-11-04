@@ -1,4 +1,4 @@
-export interface CreateEventRequest {
+export type CreateEventRequest = {
   name: string;
   location: string;
   datetime: string;

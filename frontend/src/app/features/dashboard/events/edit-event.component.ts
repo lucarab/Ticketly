@@ -1,8 +1,8 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { matEvent, matSave, matSync, matArrowBack } from '@ng-icons/material-icons/baseline';
+import { matArrowBack, matEvent, matSave, matSync } from '@ng-icons/material-icons/baseline';
 import { ToastrService } from 'ngx-toastr';
 import { DashboardNavbarComponent } from '../../shared/dashboard-navbar/dashboard-navbar.component';
 import { AuthService } from '../../../services/auth/auth.service';
@@ -18,7 +18,7 @@ import { EventsService } from '../../../services/events/events.service';
   ]
 })
 export class EditEventComponent implements OnInit {
-  currentUser = signal<UserResponse>({} as UserResponse);
+  readonly currentUser = signal<UserResponse>({} as UserResponse);
   form!: FormGroup;
   saving = false;
   loading = true;
@@ -114,10 +114,10 @@ export class EditEventComponent implements OnInit {
 
   getFieldError(field: string): string {
     const control = this.form.get(field);
-    if (!control) return '';
-    if (control.hasError('required')) return 'Dieses Feld ist erforderlich.';
-    if (control.hasError('minlength')) return 'Eingabe ist zu kurz.';
-    if (control.hasError('min')) return 'Der Wert ist zu niedrig.';
+    if (!control) {return '';}
+    if (control.hasError('required')) {return 'Dieses Feld ist erforderlich.';}
+    if (control.hasError('minlength')) {return 'Eingabe ist zu kurz.';}
+    if (control.hasError('min')) {return 'Der Wert ist zu niedrig.';}
     return 'Ungültige Eingabe.';
   }
 

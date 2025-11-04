@@ -1,27 +1,26 @@
 <div>
   <app-dashboard-navbar 
-    [user]="currentUser()" 
-    [role]="getRoleDisplayName()">
-  </app-dashboard-navbar>
+    [role]="getRoleDisplayName()" 
+    [user]="currentUser()" />
   
   <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="flex items-center justify-between mb-6">
       <h1 class="text-2xl font-bold text-gray-900 flex items-center gap-2">
-        <ng-icon name="matLocalActivity" class="!text-emerald-600" size="24"></ng-icon>
+        <ng-icon class="!text-emerald-600" name="matLocalActivity" size="24" />
         Ticket erstellen
       </h1>
-        <a [routerLink]="['/dash/tickets']" class="inline-flex items-center px-3 py-2 rounded-md bg-white hover:bg-gray-100 border border-gray-200 transition-colors">
-          <ng-icon name="matArrowBack" size="18" class="mr-2"></ng-icon>
+        <a class="inline-flex items-center px-3 py-2 rounded-md bg-white hover:bg-gray-100 border border-gray-200 transition-colors" [routerLink]="['/dash/tickets']">
+          <ng-icon class="mr-2" name="matArrowBack" size="18" />
           Zurück zur Übersicht
         </a>
     </div>
 
-    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="bg-white rounded-xl shadow-sm border border-emerald-100 p-6 space-y-6">
+    <form class="bg-white rounded-xl shadow-sm border border-emerald-100 p-6 space-y-6" [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Event</label>
           <select formControlName="eventId" [class]="'w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all ' + (hasFieldError('eventId') ? 'border-red-300 bg-red-50' : 'border-gray-300')">
-            <option [ngValue]="null" disabled>Bitte Event auswählen</option>
+            <option disabled [ngValue]="null">Bitte Event auswählen</option>
             @for (e of events(); track e.id) {
               <option [ngValue]="e.id">{{ e.name }}</option>
             }
@@ -34,7 +33,7 @@
         @if (!isUser()) {
           <label class="block text-sm font-medium text-gray-700 mb-1">Benutzer</label>
           <select formControlName="userId" [class]="'w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all ' + (hasFieldError('userId') ? 'border-red-300 bg-red-50' : 'border-gray-300')">
-            <option [ngValue]="null" disabled>Bitte Benutzer auswählen</option>
+            <option disabled [ngValue]="null">Bitte Benutzer auswählen</option>
             @for (u of users(); track u.id) {
               <option [ngValue]="u.id">{{ u.firstname }} {{ u.lastname }}</option>
             }
@@ -62,15 +61,15 @@
 
         <div>
           <label class="block text-sm font-medium text-gray-700 mb-1">Verwendet am (optional)</label>
-          <input formControlName="usedAt" type="datetime-local" class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all border-gray-300" />
+          <input class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all border-gray-300" formControlName="usedAt" type="datetime-local" />
         </div>
       </div>
       }
 
       <div class="flex items-center justify-end">
-        <button type="submit" [disabled]="form.invalid || saving" class="inline-flex items-center px-4 py-2 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white transition-colors">
-          @if (!saving) { <ng-icon name="matSave" size="18" class="mr-2"></ng-icon> }
-          @if (saving) { <ng-icon name="matSync" size="18" class="mr-2 animate-spin"></ng-icon> }
+        <button class="inline-flex items-center px-4 py-2 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white transition-colors" type="submit" [disabled]="form.invalid || saving">
+          @if (!saving) { <ng-icon class="mr-2" name="matSave" size="18" /> }
+          @if (saving) { <ng-icon class="mr-2 animate-spin" name="matSync" size="18" /> }
           {{ saving ? 'Speichern...' : 'Ticket erstellen' }}
         </button>
       </div>

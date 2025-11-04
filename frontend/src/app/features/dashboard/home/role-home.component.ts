@@ -12,8 +12,8 @@ import { UserResponse } from '../../../models/user.model';
   templateUrl: './role-home.component.html'
 })
 export class RoleHomeComponent implements OnInit {
-  currentUser = signal<UserResponse | null>(null);
-  role = signal<string>('');
+  readonly currentUser = signal<UserResponse | null>(null);
+  readonly role = signal<string>('');
 
   constructor(private authService: AuthService) {}
 

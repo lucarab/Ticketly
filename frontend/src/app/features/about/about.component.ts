@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { Navbar } from '../shared/navbar/navbar.component';
 import { 
-  matPeople, 
-  matLightbulb, 
-  matRocket, 
   matFavorite, 
+  matLightbulb, 
+  matPeople, 
+  matRocket, 
   matStar, 
   matTrendingUp 
 } from '@ng-icons/material-icons/baseline';

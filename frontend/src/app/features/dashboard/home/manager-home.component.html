@@ -1,5 +1,5 @@
 <div class="min-h-screen bg-gradient-to-br from-emerald-50 to-teal-50">
-  <app-dashboard-navbar [user]="currentUser()"></app-dashboard-navbar>
+  <app-dashboard-navbar [user]="currentUser()" />
 
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="mb-8">
@@ -15,7 +15,7 @@
             <p class="text-2xl font-bold text-gray-900">{{ eventsCount() }}</p>
           </div>
           <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center">
-            <ng-icon name="matEvent" class="!text-emerald-600" size="24"></ng-icon>
+            <ng-icon class="!text-emerald-600" name="matEvent" size="24" />
           </div>
         </div>
       </div>
@@ -27,7 +27,7 @@
             <p class="text-2xl font-bold text-gray-900">{{ publishedEventsCount() }}</p>
           </div>
           <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-            <ng-icon name="matBarChart" class="!text-blue-600" size="24"></ng-icon>
+            <ng-icon class="!text-blue-600" name="matBarChart" size="24" />
           </div>
         </div>
       </div>
@@ -39,7 +39,7 @@
             <p class="text-2xl font-bold text-gray-900">{{ ticketsCount() }}</p>
           </div>
           <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-            <ng-icon name="matQrCodeScanner" class="!text-purple-600" size="24"></ng-icon>
+            <ng-icon class="!text-purple-600" name="matQrCodeScanner" size="24" />
           </div>
         </div>
       </div>
@@ -51,7 +51,7 @@
             <p class="text-2xl font-bold text-gray-900">{{ usersCount() }}</p>
           </div>
           <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center">
-            <ng-icon name="matPerson" class="!text-orange-600" size="24"></ng-icon>
+            <ng-icon class="!text-orange-600" name="matPerson" size="24" />
           </div>
         </div>
       </div>
@@ -61,23 +61,23 @@
       <div class="bg-white rounded-xl shadow-sm border border-emerald-100 p-6">
         <h3 class="text-lg font-semibold text-gray-900 mb-4">Schnellaktionen</h3>
         <div class="grid grid-cols-2 gap-4">
-          <button [routerLink]="['/dash/events']" class="flex flex-col items-center justify-center p-4 bg-emerald-50 hover:bg-emerald-100 rounded-lg transition-colors group">
-            <ng-icon name="matEvent" class="!text-emerald-600 group-hover:!text-emerald-700 mb-2" size="24"></ng-icon>
+          <button class="flex flex-col items-center justify-center p-4 bg-emerald-50 hover:bg-emerald-100 rounded-lg transition-colors group" [routerLink]="['/dash/events']">
+            <ng-icon class="!text-emerald-600 group-hover:!text-emerald-700 mb-2" name="matEvent" size="24" />
             <span class="text-sm font-medium text-emerald-700">Events</span>
           </button>
 
-          <button [routerLink]="['/dash/tickets/scanner']" class="flex flex-col items-center justify-center p-4 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors group">
-            <ng-icon name="matQrCodeScanner" class="!text-purple-600 group-hover:!text-purple-700 mb-2" size="24"></ng-icon>
+          <button class="flex flex-col items-center justify-center p-4 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors group" [routerLink]="['/dash/tickets/scanner']">
+            <ng-icon class="!text-purple-600 group-hover:!text-purple-700 mb-2" name="matQrCodeScanner" size="24" />
             <span class="text-sm font-medium text-purple-700">Ticketscanner</span>
           </button>
 
-          <button [routerLink]="['/dash/tickets']" class="flex flex-col items-center justify-center p-4 bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors group">
-            <ng-icon name="matLocalActivity" class="!text-orange-600 group-hover:!text-orange-700 mb-2" size="24"></ng-icon>
+          <button class="flex flex-col items-center justify-center p-4 bg-orange-50 hover:bg-orange-100 rounded-lg transition-colors group" [routerLink]="['/dash/tickets']">
+            <ng-icon class="!text-orange-600 group-hover:!text-orange-700 mb-2" name="matLocalActivity" size="24" />
             <span class="text-sm font-medium text-orange-700">Tickets</span>
           </button>
 
-          <button [routerLink]="['/dash/options']" class="flex flex-col items-center justify-center p-4 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors group">
-            <ng-icon name="matSettings" class="!text-blue-600 group-hover:!text-blue-700 mb-2" size="24"></ng-icon>
+          <button class="flex flex-col items-center justify-center p-4 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors group" [routerLink]="['/dash/options']">
+            <ng-icon class="!text-blue-600 group-hover:!text-blue-700 mb-2" name="matSettings" size="24" />
             <span class="text-sm font-medium text-blue-700">Einstellungen</span>
           </button>
         </div>

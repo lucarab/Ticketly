@@ -2,7 +2,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { matLocalActivity, matDelete, matArrowBack, matCheckCircle, matEdit, matAdd, matQrCode2 } from '@ng-icons/material-icons/baseline';
+import { matAdd, matArrowBack, matCheckCircle, matDelete, matEdit, matLocalActivity, matQrCode2 } from '@ng-icons/material-icons/baseline';
 import { DashboardNavbarComponent } from '../../shared/dashboard-navbar/dashboard-navbar.component';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserResponse } from '../../../models/user.model';
@@ -18,9 +18,9 @@ import { ToastrService } from 'ngx-toastr';
   ]
 })
 export class TicketsListComponent implements OnInit {
-  currentUser = signal<UserResponse>({} as UserResponse);
-  tickets = signal<any[]>([]);
-  loading = signal<boolean>(false);
+  readonly currentUser = signal<UserResponse>({} as UserResponse);
+  readonly tickets = signal<any[]>([]);
+  readonly loading = signal<boolean>(false);
 
   constructor(
     private authService: AuthService,
@@ -60,7 +60,7 @@ export class TicketsListComponent implements OnInit {
   onDelete(ticket: any): void {
     const eventName = ticket?.event?.name || 'Ticket';
     const confirmed = confirm(`Möchtest du das Ticket für "${eventName}" wirklich löschen?`);
-    if (!confirmed) return;
+    if (!confirmed) {return;}
     this.ticketsService.deleteTicket(ticket.id as number).subscribe({
       next: () => {
         this.toastr.success(`Ticket für "${eventName}" wurde gelöscht.`, 'Ticket gelöscht');
@@ -73,7 +73,7 @@ export class TicketsListComponent implements OnInit {
   }
 
   markAsUsed(ticket: any): void {
-    if (ticket?.status === 'used') return;
+    if (ticket?.status === 'used') {return;}
     this.ticketsService.updateTicket(ticket.id, {
       status: 'used',
       usedAt: new Date().toISOString()

@@ -1,8 +1,8 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { matPerson, matEdit, matArrowBack, matSave, matSync } from '@ng-icons/material-icons/baseline';
+import { matArrowBack, matEdit, matPerson, matSave, matSync } from '@ng-icons/material-icons/baseline';
 import { DashboardNavbarComponent } from '../../shared/dashboard-navbar/dashboard-navbar.component';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserResponse } from '../../../models/user.model';
@@ -18,7 +18,7 @@ import { ToastrService } from 'ngx-toastr';
   ]
 })
 export class EditUserComponent implements OnInit {
-  currentUser = signal<UserResponse>({} as UserResponse);
+  readonly currentUser = signal<UserResponse>({} as UserResponse);
   form!: FormGroup;
   saving = false;
   loading = true;

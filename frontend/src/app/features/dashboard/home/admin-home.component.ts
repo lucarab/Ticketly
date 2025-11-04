@@ -1,4 +1,4 @@
-import { Component, signal, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { RouterLink } from '@angular/router';
 import { DashboardNavbarComponent } from '../../shared/dashboard-navbar/dashboard-navbar.component';
@@ -9,14 +9,14 @@ import { EventsService } from '../../../services/events/events.service';
 import { TicketsService } from '../../../services/tickets/tickets.service';
 
 import { 
+  matBarChart,
   matDashboard,
+  matEvent,
+  matLocalActivity,
   matLogout,
   matPerson,
-  matEvent,
   matQrCodeScanner,
-  matSettings,
-  matLocalActivity,
-  matBarChart
+  matSettings
 } from '@ng-icons/material-icons/baseline';
 
 @Component({
@@ -37,11 +37,11 @@ import {
   ]
 })
 export class AdminHomeComponent implements OnInit {
-  currentUser = signal<UserResponse>({} as UserResponse);
-  usersCount = signal<number>(0);
-  eventsCount = signal<number>(0);
-  ticketsCount = signal<number>(0);
-  publishedEventsCount = signal<number>(0);
+  readonly currentUser = signal<UserResponse>({} as UserResponse);
+  readonly usersCount = signal<number>(0);
+  readonly eventsCount = signal<number>(0);
+  readonly ticketsCount = signal<number>(0);
+  readonly publishedEventsCount = signal<number>(0);
 
   constructor(
     private authService: AuthService,

@@ -1,21 +1,21 @@
-<app-navbar></app-navbar>
+<app-navbar />
 
 <section class="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-green-50">
   <div class="absolute inset-0 opacity-5">
-    <svg class="w-full h-full" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
+    <svg class="w-full h-full" preserveAspectRatio="xMidYMid slice" viewBox="0 0 1000 1000">
       <defs>
-        <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+        <pattern height="50" id="grid" patternUnits="userSpaceOnUse" width="50">
           <path d="M 50 0 L 0 0 0 50" fill="none" stroke="currentColor" stroke-width="1"/>
         </pattern>
       </defs>
-      <rect width="100%" height="100%" fill="url(#grid)" />
+      <rect fill="url(#grid)" height="100%" width="100%" />
     </svg>
   </div>
 
   <div class="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-15">
     <div class="text-center">
       <div class="inline-flex items-center px-4 py-2 rounded-full bg-emerald-100 text-emerald-800 font-medium mb-8">
-        <ng-icon name="matCheckCircle" class="w-4 h-4 mr-2 text-emerald-600"></ng-icon>
+        <ng-icon class="w-4 h-4 mr-2 text-emerald-600" name="matCheckCircle" />
         Open Source & Kostenlos
       </div>
 
@@ -32,10 +32,10 @@
 
       <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
         <button class="btn-primary text-lg px-8 py-4 flex items-center">
-          <ng-icon name="matBolt" style="color: white !important;" size="24" class="mr-2"></ng-icon>
+          <ng-icon class="mr-2" name="matBolt" size="24" style="color: white !important;" />
           Jetzt starten
         </button>
-        <a routerLink="/about" class="btn-secondary text-lg px-8 py-4">
+        <a class="btn-secondary text-lg px-8 py-4" routerLink="/about">
           Mehr erfahren
         </a>
       </div>
@@ -73,7 +73,7 @@
       @for (feature of features; track feature.title) {
         <div class="feature-card group">
           <div class="w-12 h-12 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-            <ng-icon [name]="feature.icon" class="!text-white" size="24"></ng-icon>
+            <ng-icon class="!text-white" size="24" [name]="feature.icon" />
           </div>
           
           <h3 class="text-xl font-semibold text-gray-900 mb-3">{{ feature.title }}</h3>
@@ -98,9 +98,9 @@
       <button class="bg-white text-lg text-emerald-600 hover:bg-gray-50 font-semibold py-4 px-8 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl">
         Demo ansehen
       </button>
-      <a href="https://github.com/ticketly" target="_blank" 
-         class="bg-emerald-600 text-lg hover:bg-emerald-700 text-white font-semibold py-4 px-8 rounded-lg border-2 border-white/20 transition-all duration-200 shadow-lg hover:shadow-xl flex items-center">
-        <ng-icon name="matCode" class="!text-white mr-2" size="24"></ng-icon>
+      <a class="bg-emerald-600 text-lg hover:bg-emerald-700 text-white font-semibold py-4 px-8 rounded-lg border-2 border-white/20 transition-all duration-200 shadow-lg hover:shadow-xl flex items-center" href="https://github.com/ticketly" 
+         target="_blank">
+        <ng-icon class="!text-white mr-2" name="matCode" size="24" />
         GitHub
       </a>
     </div>

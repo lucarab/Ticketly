@@ -1,23 +1,22 @@
 <div class="min-h-screen bg-gradient-to-br from-emerald-50 to-teal-50">
   <app-dashboard-navbar 
-    [user]="currentUser()" 
-    [role]="getRoleDisplayName()">
-  </app-dashboard-navbar>
+    [role]="getRoleDisplayName()" 
+    [user]="currentUser()" />
 
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="flex items-center justify-between mb-6">
       <h1 class="text-2xl font-bold text-gray-900 flex items-center gap-2">
-        <ng-icon name="matLocalActivity" class="!text-emerald-600" size="24"></ng-icon>
+        <ng-icon class="!text-emerald-600" name="matLocalActivity" size="24" />
         Tickets
       </h1>
       <div class="flex items-center gap-3">
-        <a [routerLink]="['/dash/home']" class="inline-flex items-center px-3 py-2 rounded-md bg-white hover:bg-gray-100 border border-gray-200 transition-colors">
-          <ng-icon name="matArrowBack" size="18" class="mr-2"></ng-icon>
+        <a class="inline-flex items-center px-3 py-2 rounded-md bg-white hover:bg-gray-100 border border-gray-200 transition-colors" [routerLink]="['/dash/home']">
+          <ng-icon class="mr-2" name="matArrowBack" size="18" />
           Zurück zum Dashboard
         </a>
         @if (!isUser()) {
-          <a [routerLink]="['/dash/tickets/new']" class="inline-flex items-center px-3 py-2 rounded-md bg-emerald-600 text-white hover:bg-emerald-700 border border-emerald-600 transition-colors">
-            <ng-icon name="matAdd" size="18" class="mr-2 !text-white"></ng-icon>
+          <a class="inline-flex items-center px-3 py-2 rounded-md bg-emerald-600 text-white hover:bg-emerald-700 border border-emerald-600 transition-colors" [routerLink]="['/dash/tickets/new']">
+            <ng-icon class="mr-2 !text-white" name="matAdd" size="18" />
             Neues Ticket
           </a>
         }
@@ -64,12 +63,12 @@
               <td class="px-6 py-4 whitespace-nowrap">
                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
                       [class.bg-green-100]="t?.status === 'used'"
-                      [class.text-green-800]="t?.status === 'used'"
                       [class.bg-purple-100]="t?.status === 'active'"
-                      [class.text-purple-800]="t?.status === 'active'"
                       [class.bg-red-100]="t?.status === 'canceled'"
-                      [class.text-red-800]="t?.status === 'canceled'"
                       [class.bg-yellow-100]="t?.status === 'refunded'"
+                      [class.text-green-800]="t?.status === 'used'"
+                      [class.text-purple-800]="t?.status === 'active'"
+                      [class.text-red-800]="t?.status === 'canceled'"
                       [class.text-yellow-800]="t?.status === 'refunded'">
                   {{ t?.status || '-' }}
                 </span>
@@ -79,25 +78,25 @@
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                 @if (!isUser()) {
-                  <a [routerLink]="['/dash/tickets/edit', t?.id]"
-                     class="inline-flex items-center px-3 py-1 mr-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white transition-colors">
-                    <ng-icon name="matEdit" size="18" class="mr-1 !text-white"></ng-icon>
+                  <a class="inline-flex items-center px-3 py-1 mr-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white transition-colors"
+                     [routerLink]="['/dash/tickets/edit', t?.id]">
+                    <ng-icon class="mr-1 !text-white" name="matEdit" size="18" />
                     Bearbeiten
                   </a>
-                  <button (click)="markAsUsed(t)" [disabled]="t?.status === 'used'"
-                          class="inline-flex items-center px-3 py-1 mr-2 rounded-md bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-300 text-white transition-colors">
-                    <ng-icon name="matCheckCircle" size="18" class="mr-1 !text-white"></ng-icon>
+                  <button class="inline-flex items-center px-3 py-1 mr-2 rounded-md bg-emerald-600 hover:bg-emerald-700 disabled:bg-gray-300 text-white transition-colors" [disabled]="t?.status === 'used'"
+                          (click)="markAsUsed(t)">
+                    <ng-icon class="mr-1 !text-white" name="matCheckCircle" size="18" />
                     Als verwendet markieren
                   </button>
-                  <button (click)="onDelete(t)"
-                          class="inline-flex items-center px-3 py-1 rounded-md bg-red-600 hover:bg-red-700 text-white transition-colors">
-                    <ng-icon name="matDelete" size="18" class="mr-1 !text-white"></ng-icon>
+                  <button class="inline-flex items-center px-3 py-1 rounded-md bg-red-600 hover:bg-red-700 text-white transition-colors"
+                          (click)="onDelete(t)">
+                    <ng-icon class="mr-1 !text-white" name="matDelete" size="18" />
                     Löschen
                   </button>
                 } @else {
-                  <a [routerLink]="['/dash/tickets/qr', t?.id]"
-                     class="inline-flex items-center px-3 py-1 rounded-md bg-indigo-600 hover:bg-indigo-700 text-white transition-colors">
-                    <ng-icon name="matQrCode2" size="18" class="mr-1 !text-white"></ng-icon>
+                  <a class="inline-flex items-center px-3 py-1 rounded-md bg-indigo-600 hover:bg-indigo-700 text-white transition-colors"
+                     [routerLink]="['/dash/tickets/qr', t?.id]">
+                    <ng-icon class="mr-1 !text-white" name="matQrCode2" size="18" />
                     QR anzeigen
                   </a>
                 }
@@ -106,7 +105,7 @@
             }
             @if (!loading() && tickets().length === 0) {
               <tr>
-                <td colspan="7" class="px-6 py-8 text-center text-gray-500">Keine Tickets gefunden.</td>
+                <td class="px-6 py-8 text-center text-gray-500" colspan="7">Keine Tickets gefunden.</td>
               </tr>
             }
           </tbody>

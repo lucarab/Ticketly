@@ -3,8 +3,8 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { 
   matCheckCircle,
-  matMenu,
-  matClose
+  matClose,
+  matMenu
 } from '@ng-icons/material-icons/baseline';
 
 @Component({
@@ -20,7 +20,7 @@ import {
   ]
 })
 export class Navbar {
-  isMenuOpen = signal(false);
+  readonly isMenuOpen = signal(false);
 
   toggleMenu(): void {
     this.isMenuOpen.set(!this.isMenuOpen());

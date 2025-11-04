@@ -5,7 +5,7 @@
       
       <div class="flex items-center space-x-3">
         <div class="w-8 h-8 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-lg flex items-center justify-center shadow-lg">
-          <ng-icon name="matCheckCircle" class="!text-white" size="20"></ng-icon>
+          <ng-icon class="!text-white" name="matCheckCircle" size="20" />
         </div>
         <span class="text-xl font-bold gradient-text">Ticketly</span>
       </div>
@@ -13,33 +13,33 @@
       
       <ul class="hidden md:flex items-center space-x-4">
         <li>
-          <a routerLink="/" 
-             routerLinkActive="text-emerald-600 bg-emerald-100" 
-             [routerLinkActiveOptions]="{exact: true}"
-             class="px-4 py-2 rounded-lg font-medium hover:text-emerald-600 hover:bg-emerald-100 transition-all duration-200">
+          <a class="px-4 py-2 rounded-lg font-medium hover:text-emerald-600 hover:bg-emerald-100 transition-all duration-200" 
+             routerLink="/" 
+             routerLinkActive="text-emerald-600 bg-emerald-100"
+             [routerLinkActiveOptions]="{exact: true}">
             Startseite
           </a>
         </li>
         <li>
-          <a routerLink="/about" 
-             routerLinkActive="text-emerald-600 bg-emerald-100"
-             class="px-4 py-2 rounded-lg font-medium hover:text-emerald-600 hover:bg-emerald-100 transition-all duration-200">
+          <a class="px-4 py-2 rounded-lg font-medium hover:text-emerald-600 hover:bg-emerald-100 transition-all duration-200" 
+             routerLink="/about"
+             routerLinkActive="text-emerald-600 bg-emerald-100">
             Über uns
           </a>
         </li>
         <li>
-          <a routerLink="/login" 
-             routerLinkActive="text-emerald-600 bg-emerald-100"
-             class="btn-primary text-sm">
+          <a class="btn-primary text-sm" 
+             routerLink="/login"
+             routerLinkActive="text-emerald-600 bg-emerald-100">
             Einloggen
           </a>
         </li>
       </ul>
 
       
-      <button (click)="toggleMenu()" 
-              class="md:hidden p-2 rounded-lg hover:text-emerald-600 hover:bg-emerald-100 transition-colors">
-        <ng-icon [name]="isMenuOpen() ? 'matClose' : 'matMenu'" class="w-6 h-6"></ng-icon>
+      <button class="md:hidden p-2 rounded-lg hover:text-emerald-600 hover:bg-emerald-100 transition-colors" 
+              (click)="toggleMenu()">
+        <ng-icon class="w-6 h-6" [name]="isMenuOpen() ? 'matClose' : 'matMenu'" />
       </button>
     </div>
 
@@ -48,27 +48,27 @@
     <div class="md:hidden py-4 border-t border-emerald-100 bg-white/95 backdrop-blur-sm">
       <ul class="space-y-2">
         <li>
-          <a routerLink="/" 
-             routerLinkActive="text-emerald-600 bg-emerald-100" 
+          <a class="block px-4 py-3 rounded-lg font-medium text-gray-700 hover:text-emerald-600 hover:bg-emerald-100 transition-all duration-200" 
+             routerLink="/" 
+             routerLinkActive="text-emerald-600 bg-emerald-100"
              [routerLinkActiveOptions]="{exact: true}"
-             (click)="closeMenu()"
-             class="block px-4 py-3 rounded-lg font-medium text-gray-700 hover:text-emerald-600 hover:bg-emerald-100 transition-all duration-200">
+             (click)="closeMenu()">
             Startseite
           </a>
         </li>
         <li>
-          <a routerLink="/about" 
+          <a class="block px-4 py-3 rounded-lg font-medium text-gray-700 hover:text-emerald-600 hover:bg-emerald-100 transition-all duration-200" 
+             routerLink="/about"
              routerLinkActive="text-emerald-600 bg-emerald-100"
-             (click)="closeMenu()"
-             class="block px-4 py-3 rounded-lg font-medium text-gray-700 hover:text-emerald-600 hover:bg-emerald-100 transition-all duration-200">
+             (click)="closeMenu()">
             Über uns
           </a>
         </li>
         <li class="pt-2">
-          <a routerLink="/login" 
+          <a class="btn-primary w-full block text-center" 
+             routerLink="/login"
              routerLinkActive="text-emerald-600 bg-emerald-100"
-             (click)="closeMenu()"
-             class="btn-primary w-full block text-center">
+             (click)="closeMenu()">
             Einloggen
           </a>
         </li>

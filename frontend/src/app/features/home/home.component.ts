@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { Navbar } from '../shared/navbar/navbar.component';
 import { 
-  matQrCodeScanner, 
+  matBolt, 
   matCheckCircle, 
-  matEvent, 
+  matCode, 
   matDashboard, 
-  matExtension, 
+  matEvent, 
+  matExtension,
   matPhoneAndroid,
-  matBolt,
-  matCode
+  matQrCodeScanner
 } from '@ng-icons/material-icons/baseline';
 
 @Component({

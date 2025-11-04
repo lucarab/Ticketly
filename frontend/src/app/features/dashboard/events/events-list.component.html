@@ -1,23 +1,22 @@
 <div class="min-h-screen bg-gradient-to-br from-emerald-50 to-teal-50">
   <app-dashboard-navbar 
-    [user]="currentUser()" 
-    [role]="getRoleDisplayName()">
-  </app-dashboard-navbar>
+    [role]="getRoleDisplayName()" 
+    [user]="currentUser()" />
 
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="flex items-center justify-between mb-6">
       <h1 class="text-2xl font-bold text-gray-900 flex items-center gap-2">
-        <ng-icon name="matEvent" class="!text-emerald-600" size="24"></ng-icon>
+        <ng-icon class="!text-emerald-600" name="matEvent" size="24" />
         Events
       </h1>
       <div class="flex items-center gap-3">
-        <a [routerLink]="['/dash/home']" class="inline-flex items-center px-3 py-2 rounded-md bg-white hover:bg-gray-100 border border-gray-200 transition-colors">
-          <ng-icon name="matArrowBack" size="18" class="mr-2"></ng-icon>
+        <a class="inline-flex items-center px-3 py-2 rounded-md bg-white hover:bg-gray-100 border border-gray-200 transition-colors" [routerLink]="['/dash/home']">
+          <ng-icon class="mr-2" name="matArrowBack" size="18" />
           Zurück zum Dashboard
         </a>
         @if (!isUser()) {
-          <a [routerLink]="['/dash/events/new']" class="inline-flex items-center px-3 py-2 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white border border-emerald-600 transition-colors">
-            <ng-icon name="matAdd" size="18" class="mr-2 !text-white"></ng-icon>
+          <a class="inline-flex items-center px-3 py-2 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white border border-emerald-600 transition-colors" [routerLink]="['/dash/events/new']">
+            <ng-icon class="mr-2 !text-white" name="matAdd" size="18" />
             Neues Event
           </a>
         }
@@ -62,30 +61,30 @@
               <td class="px-6 py-4 whitespace-nowrap">
                 <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full"
                       [class.bg-green-100]="e?.status === 'published'"
-                      [class.text-green-800]="e?.status === 'published'"
-                      [class.bg-yellow-100]="e?.status === 'draft'"
-                      [class.text-yellow-800]="e?.status === 'draft'"
                       [class.bg-red-100]="e?.status === 'canceled'"
-                      [class.text-red-800]="e?.status === 'canceled'">
+                      [class.bg-yellow-100]="e?.status === 'draft'"
+                      [class.text-green-800]="e?.status === 'published'"
+                      [class.text-red-800]="e?.status === 'canceled'"
+                      [class.text-yellow-800]="e?.status === 'draft'">
                   {{ e?.status || '-' }}
                 </span>
               </td>
               <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                 @if (!isUser()) {
-                  <a [routerLink]="['/dash/events/edit', e?.id]"
-                     class="inline-flex items-center px-3 py-1 mr-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white transition-colors">
-                    <ng-icon name="matEdit" size="18" class="mr-1 !text-white"></ng-icon>
+                  <a class="inline-flex items-center px-3 py-1 mr-2 rounded-md bg-blue-600 hover:bg-blue-700 text-white transition-colors"
+                     [routerLink]="['/dash/events/edit', e?.id]">
+                    <ng-icon class="mr-1 !text-white" name="matEdit" size="18" />
                     Bearbeiten
                   </a>
-                  <button (click)="onDelete(e)"
-                          class="inline-flex items-center px-3 py-1 rounded-md bg-red-600 hover:bg-red-700 text-white transition-colors">
-                    <ng-icon name="matDelete" size="18" class="mr-1 !text-white"></ng-icon>
+                  <button class="inline-flex items-center px-3 py-1 rounded-md bg-red-600 hover:bg-red-700 text-white transition-colors"
+                          (click)="onDelete(e)">
+                    <ng-icon class="mr-1 !text-white" name="matDelete" size="18" />
                     Löschen
                   </button>
                 } @else {
-                  <button (click)="buyTicket(e)"
-                          class="inline-flex items-center px-3 py-1 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white transition-colors">
-                    <ng-icon name="matLocalActivity" size="18" class="mr-2 !text-white"></ng-icon>
+                  <button class="inline-flex items-center px-3 py-1 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white transition-colors"
+                          (click)="buyTicket(e)">
+                    <ng-icon class="mr-2 !text-white" name="matLocalActivity" size="18" />
                     Ticket kaufen
                   </button>
                 }
@@ -94,7 +93,7 @@
             }
             @if (!loading() && events().length === 0) {
               <tr>
-                <td colspan="6" class="px-6 py-8 text-center text-gray-500">Keine Events gefunden.</td>
+                <td class="px-6 py-8 text-center text-gray-500" colspan="6">Keine Events gefunden.</td>
               </tr>
             }
           </tbody>

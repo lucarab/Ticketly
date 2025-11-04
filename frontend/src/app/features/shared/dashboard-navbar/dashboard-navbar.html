@@ -3,7 +3,7 @@
     <div class="flex justify-between items-center h-16">
       <div class="flex items-center space-x-3">
         <div class="w-8 h-8 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-lg flex items-center justify-center shadow-lg">
-          <ng-icon name="matDashboard" class="!text-white" size="20"></ng-icon>
+          <ng-icon class="!text-white" name="matDashboard" size="20" />
         </div>
         <span class="text-xl font-bold gradient-text">Ticketly Dashboard</span>
       </div>
@@ -15,14 +15,14 @@
             <p class="text-xs text-gray-500">{{ getRoleDisplayName() }}</p>
           </div>
           <div class="w-10 h-10 bg-emerald-100 rounded-full flex items-center justify-center">
-            <ng-icon name="matPerson" class="!text-emerald-600" size="20"></ng-icon>
+            <ng-icon class="!text-emerald-600" name="matPerson" size="20" />
           </div>
         </div>
 
         <button 
-          (click)="logout()"
-          class="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg transition-all duration-200">
-          <ng-icon name="matLogout" size="18"></ng-icon>
+          class="flex items-center space-x-2 px-4 py-2 text-sm font-medium text-red-600 hover:text-red-700 hover:bg-red-50 rounded-lg transition-all duration-200"
+          (click)="logout()">
+          <ng-icon name="matLogout" size="18" />
           <span class="hidden sm:inline">Abmelden</span>
         </button>
       </div>

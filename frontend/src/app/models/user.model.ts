@@ -4,7 +4,7 @@ export enum UserRole {
   USER = 'user',
 }
 
-export interface UserResponse {
+export type UserResponse = {
   id: number;
   firstname: string;
   lastname: string;

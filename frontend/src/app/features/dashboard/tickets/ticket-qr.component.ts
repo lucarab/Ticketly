@@ -1,7 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { matLocalActivity, matArrowBack, matQrCode2, matSync } from '@ng-icons/material-icons/baseline';
+import { matArrowBack, matLocalActivity, matQrCode2, matSync } from '@ng-icons/material-icons/baseline';
 import { DashboardNavbarComponent } from '../../shared/dashboard-navbar/dashboard-navbar.component';
 import { AuthService } from '../../../services/auth/auth.service';
 import { TicketsService } from '../../../services/tickets/tickets.service';
@@ -17,11 +17,11 @@ import QRCode from 'qrcode';
   templateUrl: './ticket-qr.component.html'
 })
 export class TicketQrComponent implements OnInit {
-  currentUser = signal<any | null>(null);
-  loading = signal<boolean>(true);
-  generating = signal<boolean>(false);
-  ticket = signal<any | null>(null);
-  qrDataUrl = signal<string>('');
+  readonly currentUser = signal<any | null>(null);
+  readonly loading = signal<boolean>(true);
+  readonly generating = signal<boolean>(false);
+  readonly ticket = signal<any | null>(null);
+  readonly qrDataUrl = signal<string>('');
 
   constructor(
     private route: ActivatedRoute,
@@ -60,7 +60,7 @@ export class TicketQrComponent implements OnInit {
 
   async generateQr(): Promise<void> {
     const t = this.ticket();
-    if (!t?.uuid) return;
+    if (!t?.uuid) {return;}
     this.generating.set(true);
     try {
       const dataUrl = await QRCode.toDataURL(t.uuid, { width: 512, margin: 2 });

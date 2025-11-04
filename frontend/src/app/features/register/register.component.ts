@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { ToastrService } from 'ngx-toastr';
@@ -9,10 +9,10 @@ import { Navbar } from '../shared/navbar/navbar.component';
 import { 
   matEmail, 
   matLock, 
-  matVisibility, 
-  matVisibilityOff,
-  matPerson,
-  matSync
+  matPerson, 
+  matSync,
+  matVisibility,
+  matVisibilityOff
 } from '@ng-icons/material-icons/baseline';
 
 @Component({
@@ -32,9 +32,9 @@ import {
 })
 export class RegisterComponent {
   registerForm: FormGroup;
-  showPassword = signal(false);
-  showConfirmPassword = signal(false);
-  isLoading = signal(false);
+  readonly showPassword = signal(false);
+  readonly showConfirmPassword = signal(false);
+  readonly isLoading = signal(false);
 
   constructor(
     private fb: FormBuilder,

@@ -1,9 +1,9 @@
 import { Injectable, signal } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { Observable, BehaviorSubject, throwError } from 'rxjs';
-import { tap, catchError } from 'rxjs/operators';
-import { LoginRequest, LoginResponse, AuthState, RegisterRequest } from '../../models/auth.model';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { AuthState, LoginRequest, LoginResponse, RegisterRequest } from '../../models/auth.model';
 import { UserResponse } from '../../models/user.model';
 
 @Injectable({
@@ -20,10 +20,10 @@ export class AuthService {
     token: null
   });
 
-  public authState$ = this.authStateSubject.asObservable();
+  authState$ = this.authStateSubject.asObservable();
 
-  public isAuthenticated = signal(false);
-  public currentUser = signal<UserResponse | null>(null);
+  readonly isAuthenticated = signal(false);
+  readonly currentUser = signal<UserResponse | null>(null);
 
   constructor(
     private http: HttpClient,

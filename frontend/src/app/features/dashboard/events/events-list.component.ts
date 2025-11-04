@@ -2,7 +2,7 @@ import { Component, OnInit, signal } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { matEvent, matEdit, matDelete, matAdd, matArrowBack, matLocalActivity } from '@ng-icons/material-icons/baseline';
+import { matAdd, matArrowBack, matDelete, matEdit, matEvent, matLocalActivity } from '@ng-icons/material-icons/baseline';
 import { DashboardNavbarComponent } from '../../shared/dashboard-navbar/dashboard-navbar.component';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserResponse } from '../../../models/user.model';
@@ -19,9 +19,9 @@ import { ToastrService } from 'ngx-toastr';
   ]
 })
 export class EventsListComponent implements OnInit {
-  currentUser = signal<UserResponse>({} as UserResponse);
-  events = signal<any[]>([]);
-  loading = signal<boolean>(false);
+  readonly currentUser = signal<UserResponse>({} as UserResponse);
+  readonly events = signal<any[]>([]);
+  readonly loading = signal<boolean>(false);
 
   constructor(
     private authService: AuthService,
@@ -61,7 +61,7 @@ export class EventsListComponent implements OnInit {
   onDelete(event: any): void {
     const name = event?.name || 'Event';
     const confirmed = confirm(`Möchtest du "${name}" wirklich löschen?`);
-    if (!confirmed) return;
+    if (!confirmed) {return;}
     this.eventsService.deleteEvent(event.id as number).subscribe({
       next: () => {
         this.toastr.success(`"${name}" wurde gelöscht.`, 'Gelöscht');

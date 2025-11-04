@@ -1,8 +1,8 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { matLocalActivity, matAdd, matArrowBack, matSave, matSync } from '@ng-icons/material-icons/baseline';
+import { matAdd, matArrowBack, matLocalActivity, matSave, matSync } from '@ng-icons/material-icons/baseline';
 import { DashboardNavbarComponent } from '../../shared/dashboard-navbar/dashboard-navbar.component';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserResponse } from '../../../models/user.model';
@@ -20,11 +20,11 @@ import { ToastrService } from 'ngx-toastr';
   ]
 })
 export class NewTicketComponent implements OnInit {
-  currentUser = signal<UserResponse>({} as UserResponse);
+  readonly currentUser = signal<UserResponse>({} as UserResponse);
   form!: FormGroup;
   saving = false;
-  events = signal<any[]>([]);
-  users = signal<UserResponse[]>([]);
+  readonly events = signal<any[]>([]);
+  readonly users = signal<UserResponse[]>([]);
 
   constructor(
     private fb: FormBuilder,
@@ -117,8 +117,8 @@ export class NewTicketComponent implements OnInit {
 
   getFieldError(field: string): string {
     const control = this.form.get(field);
-    if (!control) return '';
-    if (control.hasError('required')) return 'Dieses Feld ist erforderlich.';
+    if (!control) {return '';}
+    if (control.hasError('required')) {return 'Dieses Feld ist erforderlich.';}
     return 'Ungültige Eingabe.';
   }
 

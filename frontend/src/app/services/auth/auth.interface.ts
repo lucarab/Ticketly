@@ -4,19 +4,19 @@ export enum UserRole {
   USER = 'user',
 }
 
-export interface LoginRequest {
+export type LoginRequest = {
   email: string;
   password: string;
 }
 
-export interface RegisterRequest {
+export type RegisterRequest = {
   firstname: string;
   lastname: string;
   email: string;
   password: string;
 }
 
-export interface UserResponse {
+export type UserResponse = {
   id: number;
   firstname: string;
   lastname: string;
@@ -26,12 +26,12 @@ export interface UserResponse {
   updatedAt: Date;
 }
 
-export interface LoginResponse {
+export type LoginResponse = {
   user: UserResponse;
   access_token: string;
 }
 
-export interface AuthState {
+export type AuthState = {
   isAuthenticated: boolean;
   user: UserResponse | null;
   token: string | null;

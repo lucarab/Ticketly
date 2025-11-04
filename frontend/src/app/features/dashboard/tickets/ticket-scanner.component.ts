@@ -1,7 +1,7 @@
-import { Component, OnInit, OnDestroy, signal, ViewChild, ElementRef } from '@angular/core';
+import { Component, ElementRef, OnDestroy, OnInit, signal, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { matQrCodeScanner, matArrowBack, matCheckCircle, matErrorOutline, matSync } from '@ng-icons/material-icons/baseline';
+import { matArrowBack, matCheckCircle, matErrorOutline, matQrCodeScanner, matSync } from '@ng-icons/material-icons/baseline';
 import { DashboardNavbarComponent } from '../../shared/dashboard-navbar/dashboard-navbar.component';
 import { AuthService } from '../../../services/auth/auth.service';
 import { TicketsService } from '../../../services/tickets/tickets.service';
@@ -19,12 +19,12 @@ import { BrowserMultiFormatReader, IScannerControls } from '@zxing/browser';
 export class TicketScannerComponent implements OnInit, OnDestroy {
   @ViewChild('preview', { static: true }) previewRef!: ElementRef<HTMLVideoElement>;
 
-  currentUser = signal<any | null>(null);
-  scanning = signal<boolean>(false);
-  resultValid = signal<boolean | null>(null);
-  resultReason = signal<string>('');
-  scannedUuid = signal<string>('');
-  manualUuid = signal<string>('');
+  readonly currentUser = signal<any | null>(null);
+  readonly scanning = signal<boolean>(false);
+  readonly resultValid = signal<boolean | null>(null);
+  readonly resultReason = signal<string>('');
+  readonly scannedUuid = signal<string>('');
+  readonly manualUuid = signal<string>('');
 
   private controls: IScannerControls | null = null;
   private reader = new BrowserMultiFormatReader();
@@ -98,7 +98,7 @@ export class TicketScannerComponent implements OnInit, OnDestroy {
 
   onManualSubmit(): void {
     const value = this.manualUuid().trim();
-    if (!value) return;
+    if (!value) {return;}
     this.handleScan(value);
   }
 

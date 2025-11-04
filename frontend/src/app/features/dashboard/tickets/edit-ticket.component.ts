@@ -1,8 +1,8 @@
 import { Component, OnInit, signal } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { matLocalActivity, matEdit, matArrowBack, matSave, matSync } from '@ng-icons/material-icons/baseline';
+import { matArrowBack, matEdit, matLocalActivity, matSave, matSync } from '@ng-icons/material-icons/baseline';
 import { DashboardNavbarComponent } from '../../shared/dashboard-navbar/dashboard-navbar.component';
 import { AuthService } from '../../../services/auth/auth.service';
 import { UserResponse } from '../../../models/user.model';
@@ -20,12 +20,12 @@ import { ToastrService } from 'ngx-toastr';
   ]
 })
 export class EditTicketComponent implements OnInit {
-  currentUser = signal<UserResponse>({} as UserResponse);
+  readonly currentUser = signal<UserResponse>({} as UserResponse);
   form!: FormGroup;
-  loading = signal<boolean>(true);
-  saving = signal<boolean>(false);
-  events = signal<any[]>([]);
-  users = signal<UserResponse[]>([]);
+  readonly loading = signal<boolean>(true);
+  readonly saving = signal<boolean>(false);
+  readonly events = signal<any[]>([]);
+  readonly users = signal<UserResponse[]>([]);
   ticketId!: number;
 
   constructor(
@@ -98,7 +98,7 @@ export class EditTicketComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.form.invalid) return;
+    if (this.form.invalid) {return;}
     this.form.markAllAsTouched();
     this.saving.set(true);
     const { eventId, userId, status, usedAt } = this.form.value;
@@ -131,13 +131,13 @@ export class EditTicketComponent implements OnInit {
 
   getFieldError(field: string): string {
     const control = this.form.get(field);
-    if (!control) return '';
-    if (control.hasError('required')) return 'Dieses Feld ist erforderlich.';
+    if (!control) {return '';}
+    if (control.hasError('required')) {return 'Dieses Feld ist erforderlich.';}
     return 'Ungültige Eingabe.';
   }
 
   toLocalDatetime(iso?: string): string {
-    if (!iso) return '';
+    if (!iso) {return '';}
     const d = new Date(iso);
     const pad = (n: number) => (n < 10 ? '0' + n : '' + n);
     const yyyy = d.getFullYear();

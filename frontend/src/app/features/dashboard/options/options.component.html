@@ -1,19 +1,18 @@
 <div class="min-h-screen bg-gradient-to-br from-emerald-50 to-teal-50">
   <app-dashboard-navbar 
-    [user]="currentUser()" 
-    [role]="getRoleDisplayName()">
-  </app-dashboard-navbar>
+    [role]="getRoleDisplayName()" 
+    [user]="currentUser()" />
 
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <div class="mb-8 flex items-center justify-between">
       <div class="flex items-center space-x-3">
         <div class="w-10 h-10 bg-emerald-100 rounded-lg flex items-center justify-center">
-          <ng-icon name="matSettings" class="!text-emerald-600" size="22"></ng-icon>
+          <ng-icon class="!text-emerald-600" name="matSettings" size="22" />
         </div>
         <h1 class="text-3xl font-bold text-gray-900">Optionen</h1>
       </div>
-        <a [routerLink]="['/dash/home']" class="inline-flex items-center px-3 py-2 rounded-md bg-white hover:bg-gray-100 border border-gray-200 transition-colors">
-          <ng-icon name="matArrowBack" size="18" class="mr-2"></ng-icon>
+        <a class="inline-flex items-center px-3 py-2 rounded-md bg-white hover:bg-gray-100 border border-gray-200 transition-colors" [routerLink]="['/dash/home']">
+          <ng-icon class="mr-2" name="matArrowBack" size="18" />
           Zurück zum Dashboard
         </a>
     </div>
@@ -23,12 +22,12 @@
         <h2 class="text-lg font-semibold text-gray-900 mb-4">Profil-Einstellungen</h2>
         <div class="space-y-4">
           <h3 class="text-base font-medium text-gray-800">Passwort ändern</h3>
-          <form [formGroup]="passwordForm" (ngSubmit)="onChangePassword()" class="space-y-3">
+          <form class="space-y-3" [formGroup]="passwordForm" (ngSubmit)="onChangePassword()">
             <div>
               <label class="block text-sm font-medium text-gray-700">Aktuelles Passwort</label>
               <input 
-                type="password" 
                 formControlName="currentPassword" 
+                type="password" 
                 [class]="'mt-1 w-full rounded-md border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all ' + (hasPasswordFieldError('currentPassword') ? 'border-red-300 bg-red-50' : 'border-gray-300')"/>
               @if (hasPasswordFieldError('currentPassword')) {
                 <div class="text-sm text-red-600">{{ getPasswordFieldError('currentPassword') }}</div>
@@ -38,8 +37,8 @@
               <div>
                 <label class="block text-sm font-medium text-gray-700">Neues Passwort</label>
                 <input 
-                  type="password" 
                   formControlName="newPassword" 
+                  type="password" 
                   [class]="'mt-1 w-full rounded-md border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all ' + (hasPasswordFieldError('newPassword') ? 'border-red-300 bg-red-50' : 'border-gray-300')"/>
                 @if (hasPasswordFieldError('newPassword')) {
                   <div class="text-sm text-red-600">{{ getPasswordFieldError('newPassword') }}</div>
@@ -48,15 +47,15 @@
               <div>
                 <label class="block text-sm font-medium text-gray-700">Neues Passwort bestätigen</label>
                 <input 
-                  type="password" 
                   formControlName="confirmPassword" 
+                  type="password" 
                   [class]="'mt-1 w-full rounded-md border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all ' + (hasPasswordFieldError('confirmPassword') ? 'border-red-300 bg-red-50' : 'border-gray-300')"/>
                 @if (hasPasswordFieldError('confirmPassword')) {
                   <div class="text-sm text-red-600">{{ getPasswordFieldError('confirmPassword') }}</div>
                 }
               </div>
             </div>
-            <button type="submit" class="inline-flex items-center px-4 py-2 rounded-md bg-emerald-600 text-white hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:opacity-50 transition-colors" [disabled]="isSavingPassword()">
+            <button class="inline-flex items-center px-4 py-2 rounded-md bg-emerald-600 text-white hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 disabled:opacity-50 transition-colors" type="submit" [disabled]="isSavingPassword()">
               @if (!isSavingPassword()) { <span>Passwort aktualisieren</span> } @else { <span>Aktualisiere...</span> }
             </button>
           </form>
@@ -69,14 +68,14 @@
           <p class="text-sm text-red-600 mb-4">Dieser Vorgang ist endgültig. Gib zur Bestätigung "LÖSCHEN" ein.</p>
           <form [formGroup]="deleteForm" (ngSubmit)="onDeleteAccount()">
             <input 
-              type="text" 
               formControlName="confirm" 
-              [class]="'w-full rounded-md border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all ' + (hasDeleteFieldError('confirm') ? 'border-red-300 bg-red-50' : 'border-gray-300')" 
-              placeholder="LÖSCHEN"/>
+              placeholder="LÖSCHEN" 
+              type="text" 
+              [class]="'w-full rounded-md border px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all ' + (hasDeleteFieldError('confirm') ? 'border-red-300 bg-red-50' : 'border-gray-300')"/>
             @if (hasDeleteFieldError('confirm')) {
               <div class="text-sm text-red-600">{{ getDeleteFieldError('confirm') }}</div>
             }
-            <button type="submit" class="mt-3 inline-flex items-center px-4 py-2 rounded-md bg-red-600 text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50 transition-colors" [disabled]="isDeleting()">
+            <button class="mt-3 inline-flex items-center px-4 py-2 rounded-md bg-red-600 text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 disabled:opacity-50 transition-colors" type="submit" [disabled]="isDeleting()">
               @if (!isDeleting()) { <span>Account endgültig löschen</span> } @else { <span>Lösche...</span> }
             </button>
           </form>
