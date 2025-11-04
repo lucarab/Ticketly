@@ -1,4 +1,13 @@
-import { Table, Column, Model, DataType, CreatedAt, UpdatedAt, BeforeCreate, BeforeUpdate } from 'sequelize-typescript';
+import {
+  Table,
+  Column,
+  Model,
+  DataType,
+  CreatedAt,
+  UpdatedAt,
+  BeforeCreate,
+  BeforeUpdate,
+} from 'sequelize-typescript';
 import * as bcrypt from 'bcrypt';
 
 export enum UserRole {

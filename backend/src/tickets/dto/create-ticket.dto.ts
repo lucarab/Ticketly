@@ -13,11 +13,19 @@ export class CreateTicketDto {
 
   @IsOptional()
   @IsEnum(TicketStatus)
-  @ApiPropertyOptional({ description: 'Status des Tickets (für Benutzer automatisch auf "active")', enum: Object.values(TicketStatus), example: TicketStatus.ACTIVE })
+  @ApiPropertyOptional({
+    description: 'Status des Tickets (für Benutzer automatisch auf "active")',
+    enum: Object.values(TicketStatus),
+    example: TicketStatus.ACTIVE,
+  })
   status?: TicketStatus;
 
   @IsOptional()
   @IsDateString()
-  @ApiPropertyOptional({ description: 'Zeitpunkt der Nutzung (wird für Benutzer ignoriert)', format: 'date-time', example: '2025-06-15T09:00:00.000Z' })
+  @ApiPropertyOptional({
+    description: 'Zeitpunkt der Nutzung (wird für Benutzer ignoriert)',
+    format: 'date-time',
+    example: '2025-06-15T09:00:00.000Z',
+  })
   usedAt?: string;
 }

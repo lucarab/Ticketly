@@ -11,7 +11,7 @@ import { JobsModule } from './jobs/jobs.module';
 @Module({
   imports: [
     SequelizeModule.forRoot(dataBaseConfig),
-    UsersModule, 
+    UsersModule,
     AuthModule,
     DatabaseModule,
     EventsModule,

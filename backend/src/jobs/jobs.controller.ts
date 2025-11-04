@@ -1,6 +1,27 @@
-import { Body, Controller, Get, HttpCode, HttpStatus, Param, ParseIntPipe, Post, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  HttpCode,
+  HttpStatus,
+  Param,
+  ParseIntPipe,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { JobsService } from './jobs.service';
-import { ApiBearerAuth, ApiOperation, ApiTags, ApiAcceptedResponse, ApiOkResponse, ApiParam, ApiUnauthorizedResponse, ApiForbiddenResponse, ApiExtraModels, getSchemaPath } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiOperation,
+  ApiTags,
+  ApiAcceptedResponse,
+  ApiOkResponse,
+  ApiParam,
+  ApiUnauthorizedResponse,
+  ApiForbiddenResponse,
+  ApiExtraModels,
+  getSchemaPath,
+} from '@nestjs/swagger';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { Roles } from '../auth/roles.decorator';
 import { RolesGuard } from '../auth/roles.guard';
@@ -16,14 +37,28 @@ import { TicketsByStatusDto } from './dto/tickets-by-status.dto';
 @ApiBearerAuth()
 @UseGuards(JwtAuthGuard, RolesGuard)
 @Controller('jobs')
-@ApiExtraModels(JobAcceptedResponseDto, JobStatusResponseDto, ReportJobResultDto, EventDeleteResultDto, ReportSummaryDto, TicketsByStatusDto)
+@ApiExtraModels(
+  JobAcceptedResponseDto,
+  JobStatusResponseDto,
+  ReportJobResultDto,
+  EventDeleteResultDto,
+  ReportSummaryDto,
+  TicketsByStatusDto,
+)
 export class JobsController {
   constructor(private readonly jobsService: JobsService) {}
 
   @Post('reports')
   @HttpCode(HttpStatus.ACCEPTED)
-  @ApiOperation({ summary: 'Startet Report-Job (Statistiken ausgeben)', description: '30 Sekunden fiktive Jobdauer. Nur Administratoren können Jobs ausführen. Gibt 202 Accepted mit Job-ID und Status-URL zurück.' })
-  @ApiAcceptedResponse({ description: 'Job gestartet', schema: { $ref: getSchemaPath(JobAcceptedResponseDto) } })
+  @ApiOperation({
+    summary: 'Startet Report-Job (Statistiken ausgeben)',
+    description:
+      '30 Sekunden fiktive Jobdauer. Nur Administratoren können Jobs ausführen. Gibt 202 Accepted mit Job-ID und Status-URL zurück.',
+  })
+  @ApiAcceptedResponse({
+    description: 'Job gestartet',
+    schema: { $ref: getSchemaPath(JobAcceptedResponseDto) },
+  })
   @ApiUnauthorizedResponse({ description: 'Nicht autorisiert' })
   @ApiForbiddenResponse({ description: 'Nicht erlaubt für Manager/Benutzer' })
   @Roles(UserRole.ADMIN)
@@ -38,9 +73,16 @@ export class JobsController {
 
   @Post('events/:id/delete')
   @HttpCode(HttpStatus.ACCEPTED)
-  @ApiOperation({ summary: 'Startet Event-Lösch-Job (Event und zugehörige Tickets löschen)', description: '30 Sekunden fiktive Jobdauer. Nur Administratoren können Jobs ausführen. Gibt 202 Accepted mit Job-ID und Status-URL zurück.' })
+  @ApiOperation({
+    summary: 'Startet Event-Lösch-Job (Event und zugehörige Tickets löschen)',
+    description:
+      '30 Sekunden fiktive Jobdauer. Nur Administratoren können Jobs ausführen. Gibt 202 Accepted mit Job-ID und Status-URL zurück.',
+  })
   @ApiParam({ name: 'id', type: Number, description: 'Event-ID', example: 42 })
-  @ApiAcceptedResponse({ description: 'Job gestartet', schema: { $ref: getSchemaPath(JobAcceptedResponseDto) } })
+  @ApiAcceptedResponse({
+    description: 'Job gestartet',
+    schema: { $ref: getSchemaPath(JobAcceptedResponseDto) },
+  })
   @ApiUnauthorizedResponse({ description: 'Nicht autorisiert' })
   @ApiForbiddenResponse({ description: 'Nicht erlaubt für Manager/Benutzer' })
   @Roles(UserRole.ADMIN)
@@ -54,9 +96,21 @@ export class JobsController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Jobstatus abrufen', description: 'Nur Administratoren können Jobs abrufen. Gibt Status, Fehler und Ergebnis des Jobs zurück.' })
-  @ApiParam({ name: 'id', type: String, description: 'Job-ID', example: 'b9f6d5b2-0d61-4e13-9f4a-8f2f9cb6a123' })
-  @ApiOkResponse({ description: 'Jobstatus', schema: { $ref: getSchemaPath(JobStatusResponseDto) } })
+  @ApiOperation({
+    summary: 'Jobstatus abrufen',
+    description:
+      'Nur Administratoren können Jobs abrufen. Gibt Status, Fehler und Ergebnis des Jobs zurück.',
+  })
+  @ApiParam({
+    name: 'id',
+    type: String,
+    description: 'Job-ID',
+    example: 'b9f6d5b2-0d61-4e13-9f4a-8f2f9cb6a123',
+  })
+  @ApiOkResponse({
+    description: 'Jobstatus',
+    schema: { $ref: getSchemaPath(JobStatusResponseDto) },
+  })
   @ApiUnauthorizedResponse({ description: 'Nicht autorisiert' })
   @ApiForbiddenResponse({ description: 'Nicht erlaubt für Manager/Benutzer' })
   @Roles(UserRole.ADMIN)

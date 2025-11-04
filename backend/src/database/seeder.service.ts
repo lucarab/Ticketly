@@ -68,26 +68,40 @@ export class SeederService {
         status: EventStatus.PUBLISHED,
       } as Partial<Event>;
 
-      const existingEvent = await this.eventModel.findOne({ where: { name: exampleEventData.name } });
-      const event = existingEvent ?? await this.eventModel.create(exampleEventData as any);
+      const existingEvent = await this.eventModel.findOne({
+        where: { name: exampleEventData.name },
+      });
+      const event =
+        existingEvent ??
+        (await this.eventModel.create(exampleEventData as any));
       if (!existingEvent) {
         this.logger.log(`Beispiel-Event erstellt: ${event.name}`);
       } else {
-        this.logger.log(`Beispiel-Event existiert bereits: ${existingEvent.name}`);
+        this.logger.log(
+          `Beispiel-Event existiert bereits: ${existingEvent.name}`,
+        );
       }
 
-      const demoUser = await this.userModel.findOne({ where: { email: 'user@ticketly.com' } });
+      const demoUser = await this.userModel.findOne({
+        where: { email: 'user@ticketly.com' },
+      });
       if (demoUser) {
-        const existingTicket = await this.ticketModel.findOne({ where: { userId: demoUser.id, eventId: event.id } });
+        const existingTicket = await this.ticketModel.findOne({
+          where: { userId: demoUser.id, eventId: event.id },
+        });
         if (!existingTicket) {
           await this.ticketModel.create({
             eventId: event.id,
             userId: demoUser.id,
             status: TicketStatus.ACTIVE,
           } as any);
-          this.logger.log(`Demo-Ticket erstellt für Benutzer ${demoUser.email} zu Event ${event.name}`);
+          this.logger.log(
+            `Demo-Ticket erstellt für Benutzer ${demoUser.email} zu Event ${event.name}`,
+          );
         } else {
-          this.logger.log(`Demo-Ticket existiert bereits für Benutzer ${demoUser.email} zu Event ${event.name}`);
+          this.logger.log(
+            `Demo-Ticket existiert bereits für Benutzer ${demoUser.email} zu Event ${event.name}`,
+          );
         }
       }
 

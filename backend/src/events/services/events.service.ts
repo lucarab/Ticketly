@@ -30,7 +30,10 @@ export class EventsService {
   }
 
   async findPublished(): Promise<Event[]> {
-    return this.eventModel.findAll({ where: { status: EventStatus.PUBLISHED }, order: [['datetime', 'ASC']] });
+    return this.eventModel.findAll({
+      where: { status: EventStatus.PUBLISHED },
+      order: [['datetime', 'ASC']],
+    });
   }
 
   async findOne(id: number): Promise<Event> {
@@ -53,7 +56,10 @@ export class EventsService {
     const event = await this.findOne(id);
     const sequelize = this.eventModel.sequelize!;
     await sequelize.transaction(async (t) => {
-      await this.ticketModel.destroy({ where: { eventId: id }, transaction: t });
+      await this.ticketModel.destroy({
+        where: { eventId: id },
+        transaction: t,
+      });
       await event.destroy({ transaction: t });
     });
     return { deleted: true };

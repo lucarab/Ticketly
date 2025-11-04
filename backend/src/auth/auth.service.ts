@@ -17,7 +17,7 @@ export class AuthService {
   async register(createUserDto: CreateUserDto): Promise<LoginResponseDto> {
     const user = await this.usersService.create(createUserDto);
     const payload = { sub: user.id, email: user.email, role: user.role };
-    
+
     return {
       user: this.mapToUserResponse(user),
       access_token: this.jwtService.sign(payload),
@@ -25,9 +25,12 @@ export class AuthService {
   }
 
   async login(loginUserDto: LoginUserDto): Promise<LoginResponseDto> {
-    const user = await this.validateUser(loginUserDto.email, loginUserDto.password);
+    const user = await this.validateUser(
+      loginUserDto.email,
+      loginUserDto.password,
+    );
     const payload = { sub: user.id, email: user.email, role: user.role };
-    
+
     return {
       user: this.mapToUserResponse(user),
       access_token: this.jwtService.sign(payload),
@@ -38,11 +41,11 @@ export class AuthService {
     try {
       const user = await this.usersService.findByEmail(email);
       const isPasswordValid = await user.comparePassword(password);
-      
+
       if (!isPasswordValid) {
         throw new UnauthorizedException('Invalid credentials');
       }
-      
+
       return user;
     } catch (error) {
       throw new UnauthorizedException('Invalid credentials');

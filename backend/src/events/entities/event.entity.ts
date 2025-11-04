@@ -1,4 +1,15 @@
-import { Table, Column, Model, DataType, CreatedAt, UpdatedAt, ForeignKey, BelongsTo, Index, HasMany } from 'sequelize-typescript';
+import {
+  Table,
+  Column,
+  Model,
+  DataType,
+  CreatedAt,
+  UpdatedAt,
+  ForeignKey,
+  BelongsTo,
+  Index,
+  HasMany,
+} from 'sequelize-typescript';
 import { Ticket } from '../../tickets/entities/ticket.entity';
 
 export enum EventStatus {
@@ -43,7 +54,10 @@ export class Event extends Model<Event> {
     allowNull: false,
     defaultValue: 0,
     get(this: Event) {
-      const raw = this.getDataValue('price') as unknown as string | number | null;
+      const raw = this.getDataValue('price') as unknown as
+        | string
+        | number
+        | null;
       if (raw === null || raw === undefined) return 0;
       return typeof raw === 'number' ? raw : parseFloat(String(raw));
     },

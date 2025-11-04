@@ -46,7 +46,7 @@ export class JobsService {
       status: 'queued',
       createdAt: new Date(),
       updatedAt: new Date(),
-      
+
       result: null,
       error: null,
     };
@@ -58,7 +58,14 @@ export class JobsService {
       this.save(job);
 
       try {
-        const [eventsTotal, ticketsTotal, ticketsActive, ticketsUsed, ticketsCanceled, ticketsRefunded] = await Promise.all([
+        const [
+          eventsTotal,
+          ticketsTotal,
+          ticketsActive,
+          ticketsUsed,
+          ticketsCanceled,
+          ticketsRefunded,
+        ] = await Promise.all([
           this.eventModel.count(),
           this.ticketModel.count(),
           this.ticketModel.count({ where: { status: TicketStatus.ACTIVE } }),

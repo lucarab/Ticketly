@@ -1,4 +1,9 @@
-import { Injectable, ConflictException, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  ConflictException,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { User, UserRole } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -19,7 +24,9 @@ export class UsersService {
     try {
       const existingUser = await this.findByEmail(createUserDto.email);
       if (existingUser) {
-        throw new ConflictException('Benutzer mit dieser E-Mail-Adresse existiert bereits');
+        throw new ConflictException(
+          'Benutzer mit dieser E-Mail-Adresse existiert bereits',
+        );
       }
     } catch (error) {
       if (!(error instanceof NotFoundException)) {
@@ -60,7 +67,9 @@ export class UsersService {
   async updateUser(id: number, dto: UpdateUserDto): Promise<User> {
     const user = await this.findById(id);
     if (dto.email && dto.email !== user.email) {
-      const existing = await this.userModel.findOne({ where: { email: dto.email } });
+      const existing = await this.userModel.findOne({
+        where: { email: dto.email },
+      });
       if (existing) {
         throw new ConflictException('E-Mail-Adresse wird bereits verwendet');
       }
@@ -73,17 +82,22 @@ export class UsersService {
     return user;
   }
 
-  async updatePassword(userId: number, updatePasswordDto: UpdatePasswordDto): Promise<User> {
+  async updatePassword(
+    userId: number,
+    updatePasswordDto: UpdatePasswordDto,
+  ): Promise<User> {
     const user = await this.findById(userId);
-    
-    const isCurrentPasswordValid = await user.comparePassword(updatePasswordDto.currentPassword);
+
+    const isCurrentPasswordValid = await user.comparePassword(
+      updatePasswordDto.currentPassword,
+    );
     if (!isCurrentPasswordValid) {
       throw new BadRequestException('Aktuelles Kennwort ist falsch');
     }
 
     user.password = updatePasswordDto.newPassword;
     await user.save();
-    
+
     return user;
   }
 

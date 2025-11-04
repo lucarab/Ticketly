@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Ticket } from './entities/ticket.entity';
 import { CreateTicketDto } from './dto/create-ticket.dto';
@@ -48,18 +52,25 @@ export class TicketsService {
   }
 
   async findOne(id: number): Promise<Ticket> {
-    const ticket = await this.ticketModel.findByPk(id, { include: [Event, User] });
+    const ticket = await this.ticketModel.findByPk(id, {
+      include: [Event, User],
+    });
     if (!ticket) throw new NotFoundException('Ticket nicht gefunden');
     return ticket;
   }
 
   async findByUuid(uuid: string): Promise<Ticket> {
-    const ticket = await this.ticketModel.findOne({ where: { uuid }, include: [Event, User] });
+    const ticket = await this.ticketModel.findOne({
+      where: { uuid },
+      include: [Event, User],
+    });
     if (!ticket) throw new NotFoundException('Ticket nicht gefunden');
     return ticket;
   }
 
-  async scanByUuid(uuid: string): Promise<{ valid: boolean; reason?: string; ticket?: Ticket }> {
+  async scanByUuid(
+    uuid: string,
+  ): Promise<{ valid: boolean; reason?: string; ticket?: Ticket }> {
     const ticket = await this.ticketModel.findOne({ where: { uuid } });
     if (!ticket) {
       return { valid: false, reason: 'not_found' };

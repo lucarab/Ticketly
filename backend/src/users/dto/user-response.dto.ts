@@ -11,15 +11,28 @@ export class UserResponseDto {
   @ApiProperty({ description: 'Nachname des Benutzers', example: 'Mustermann' })
   lastname: string;
 
-  @ApiProperty({ description: 'E-Mail des Benutzers', example: 'max.mustermann@example.com' })
+  @ApiProperty({
+    description: 'E-Mail des Benutzers',
+    example: 'max.mustermann@example.com',
+  })
   email: string;
 
-  @ApiProperty({ description: 'Rolle des Benutzers', enum: ['admin', 'manager', 'user'], example: 'user' })
+  @ApiProperty({
+    description: 'Rolle des Benutzers',
+    enum: ['admin', 'manager', 'user'],
+    example: 'user',
+  })
   role: UserRole;
 
-  @ApiProperty({ description: 'Erstellungsdatum', example: '2025-01-20T10:15:00.000Z' })
+  @ApiProperty({
+    description: 'Erstellungsdatum',
+    example: '2025-01-20T10:15:00.000Z',
+  })
   createdAt: Date;
 
-  @ApiProperty({ description: 'Letzte Aktualisierung', example: '2025-01-20T10:20:00.000Z' })
+  @ApiProperty({
+    description: 'Letzte Aktualisierung',
+    example: '2025-01-20T10:20:00.000Z',
+  })
   updatedAt: Date;
 }

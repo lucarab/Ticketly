@@ -13,11 +13,17 @@ export class CreateUserDto {
   lastname: string;
 
   @IsEmail()
-  @ApiProperty({ description: 'E-Mail-Adresse des Benutzers', example: 'max.mustermann@example.com' })
+  @ApiProperty({
+    description: 'E-Mail-Adresse des Benutzers',
+    example: 'max.mustermann@example.com',
+  })
   email: string;
 
   @IsString()
   @MinLength(6)
-  @ApiProperty({ description: 'Passwort (min. 6 Zeichen)', example: 'Passwort123' })
+  @ApiProperty({
+    description: 'Passwort (min. 6 Zeichen)',
+    example: 'Passwort123',
+  })
   password: string;
 }
