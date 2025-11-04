@@ -46,7 +46,7 @@ export class Ticket extends Model<Ticket> {
   })
   declare eventId: number;
 
-  @BelongsTo(() => Event)
+  @BelongsTo(() => Event, { onDelete: 'CASCADE' })
   declare event: Event;
 
   @ForeignKey(() => User)
@@ -56,7 +56,7 @@ export class Ticket extends Model<Ticket> {
   })
   declare userId: number;
 
-  @BelongsTo(() => User)
+  @BelongsTo(() => User, { onDelete: 'CASCADE' })
   declare user: User;
 
   @Column({

@@ -1,0 +1,49 @@
+<div>
+  <app-dashboard-navbar 
+    [user]="currentUser()" 
+    [role]="getRoleDisplayName()">
+  </app-dashboard-navbar>
+
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="flex items-center justify-between mb-6">
+      <h1 class="text-2xl font-bold text-gray-900 flex items-center gap-2">
+        <ng-icon name="matLocalActivity" class="!text-emerald-600" size="24"></ng-icon>
+        Ticket QR-Code
+      </h1>
+      <a [routerLink]="['/dash/tickets']" class="inline-flex items-center px-3 py-2 rounded-md bg-white hover:bg-gray-100 border border-gray-200 transition-colors">
+        <ng-icon name="matArrowBack" size="18" class="mr-2"></ng-icon>
+        Zurück zur Übersicht
+      </a>
+    </div>
+
+    @if (loading()) {
+      <div class="text-gray-600">Ticket wird geladen...</div>
+    }
+
+    @if (!loading()) {
+    <section class="bg-white rounded-xl shadow-sm border border-emerald-100 p-6">
+      <div class="mb-4">
+        <div class="text-sm text-gray-500 font-bold">Ticket-UUID</div>
+        <div class="text-base font-mono">{{ ticket()?.uuid }}</div>
+      </div>
+
+      <div class="flex items-center justify-center">
+        <div class="w-[320px] h-[320px] flex items-center justify-center border border-gray-200 rounded-lg">
+          @if (qrDataUrl()) { <img [src]="qrDataUrl()" alt="Ticket QR" class="block w-[300px] h-[300px]" /> }
+          @if (!qrDataUrl()) {
+            <ng-icon name="matSync" class="animate-spin mr-2" size="18"></ng-icon>
+            QR-Code wird erzeugt...
+          }
+        </div>
+      </div>
+
+      <p class="text-sm text-gray-600 mt-4">
+        Dieses Ticket ist nur einmalig nutzbar. Eine Übertragung oder Auszahlung ist ausgeschlossen.
+      </p>
+      <p class="text-sm text-gray-600">
+        <strong>Bitte diesen QR-Code am Einlass vorzeigen.</strong> Er enthält die eindeutige Ticket-UUID.
+      </p>
+    </section>
+    }
+  </main>
+</div>

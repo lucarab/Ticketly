@@ -20,9 +20,9 @@ export class TicketResponseDto {
   @ApiPropertyOptional({ description: 'Zeitpunkt der Nutzung', format: 'date-time', example: '2025-06-15T09:00:00.000Z' })
   usedAt?: Date;
 
-  @ApiProperty({ description: 'Erstellt am', format: 'date-time' })
+  @ApiProperty({ description: 'Erstellt am', format: 'date-time', example: '2025-05-01T10:00:00.000Z' })
   createdAt: Date;
 
-  @ApiProperty({ description: 'Aktualisiert am', format: 'date-time' })
+  @ApiProperty({ description: 'Aktualisiert am', format: 'date-time', example: '2025-05-10T12:00:00.000Z' })
   updatedAt: Date;
 }

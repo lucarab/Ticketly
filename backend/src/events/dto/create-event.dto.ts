@@ -5,30 +5,29 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 export class CreateEventDto {
   @IsString()
   @IsNotEmpty()
-  @ApiProperty()
+  @ApiProperty({ description: 'Name des Events', example: 'Tech Conference 2025' })
   name!: string;
 
   @IsString()
   @IsNotEmpty()
-  @ApiProperty()
+  @ApiProperty({ description: 'Veranstaltungsort', example: 'Berlin, Stadthalle' })
   location!: string;
 
   @IsDateString()
-  @ApiProperty()
+  @ApiProperty({ description: 'Datum und Uhrzeit', format: 'date-time', example: '2025-06-15T09:00:00.000Z' })
   datetime!: string;
 
-  @IsString()
-  @IsNotEmpty()
-  @ApiProperty()
-  price!: string;
+  @IsNumber()
+  @ApiProperty({ description: 'Preis', example: 49.99 })
+  price!: number;
 
   @IsNumber()
-  @ApiProperty()
+  @ApiProperty({ description: 'Maximale Anzahl an Tickets', example: 250 })
   maxTicketAmount!: number;
 
   @IsOptional()
   @IsString()
-  @ApiPropertyOptional()
+  @ApiPropertyOptional({ description: 'Beschreibung des Events', example: 'Eine Konferenz für Entwickler und IT-Experten.' })
   description?: string;
 
   @IsOptional()

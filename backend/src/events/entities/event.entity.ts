@@ -1,5 +1,5 @@
-import { Table, Column, Model, DataType, CreatedAt, UpdatedAt, ForeignKey, BelongsTo, Index } from 'sequelize-typescript';
-import { User } from '../../users/entities/user.entity';
+import { Table, Column, Model, DataType, CreatedAt, UpdatedAt, ForeignKey, BelongsTo, Index, HasMany } from 'sequelize-typescript';
+import { Ticket } from '../../tickets/entities/ticket.entity';
 
 export enum EventStatus {
   DRAFT = 'draft',
@@ -42,8 +42,18 @@ export class Event extends Model<Event> {
     type: DataType.DECIMAL(10, 2),
     allowNull: false,
     defaultValue: 0,
+    get(this: Event) {
+      const raw = this.getDataValue('price') as unknown as string | number | null;
+      if (raw === null || raw === undefined) return 0;
+      return typeof raw === 'number' ? raw : parseFloat(String(raw));
+    },
+    set(this: Event, value: number) {
+      const num = Number(value);
+      const rounded = Number.isFinite(num) ? parseFloat(num.toFixed(2)) : 0;
+      this.setDataValue('price', rounded);
+    },
   })
-  declare price: string;
+  declare price: number;
 
   @Column({
     type: DataType.INTEGER,
@@ -63,6 +73,9 @@ export class Event extends Model<Event> {
     defaultValue: EventStatus.DRAFT,
   })
   declare status: EventStatus;
+
+  @HasMany(() => Ticket, { onDelete: 'CASCADE' })
+  declare tickets: Ticket[];
 
   @CreatedAt
   declare createdAt: Date;

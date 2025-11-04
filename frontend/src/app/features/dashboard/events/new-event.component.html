@@ -1,0 +1,78 @@
+<div>
+  <app-dashboard-navbar 
+    [user]="authService.getCurrentUser()" 
+    [role]="getRoleDisplayName()">
+  </app-dashboard-navbar>
+  
+  <main class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div class="flex items-center justify-between mb-6">
+      <h1 class="text-2xl font-bold text-gray-900 flex items-center gap-2">
+        <ng-icon name="matEvent" class="!text-emerald-600" size="24"></ng-icon>
+        Event erstellen
+      </h1>
+        <a [routerLink]="['/dash/events']" class="inline-flex items-center px-3 py-2 rounded-md bg-white hover:bg-gray-100 border border-gray-200 transition-colors">
+          <ng-icon name="matArrowBack" size="18" class="mr-2"></ng-icon>
+          Zurück zur Übersicht
+        </a>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="bg-white rounded-xl shadow-sm border border-emerald-100 p-6 space-y-6">
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Event-Name</label>
+        <input formControlName="name" type="text" [class]="'w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all ' + (hasFieldError('name') ? 'border-red-300 bg-red-50' : 'border-gray-300')" placeholder="z.B. Sommerkonzert" />
+        @if (hasFieldError('name')) { <div class="text-sm text-red-600 mt-1">{{ getFieldError('name') }}</div> }
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Ort</label>
+        <input formControlName="location" type="text" [class]="'w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all ' + (hasFieldError('location') ? 'border-red-300 bg-red-50' : 'border-gray-300')" placeholder="z.B. Berlin Arena" />
+        @if (hasFieldError('location')) { <div class="text-sm text-red-600 mt-1">{{ getFieldError('location') }}</div> }
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Datum & Zeit</label>
+          <input formControlName="datetime" type="datetime-local" [class]="'w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all ' + (hasFieldError('datetime') ? 'border-red-300 bg-red-50' : 'border-gray-300')" />
+          @if (hasFieldError('datetime')) { <div class="text-sm text-red-600 mt-1">{{ getFieldError('datetime') }}</div> }
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Preis (€)</label>
+          <input formControlName="price" type="text" [class]="'w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all ' + (hasFieldError('price') ? 'border-red-300 bg-red-50' : 'border-gray-300')" placeholder="z.B. 19.99" />
+          @if (hasFieldError('price')) { <div class="text-sm text-red-600 mt-1">{{ getFieldError('price') }}</div> }
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Max. Tickets</label>
+          <input formControlName="maxTicketAmount" type="number" [class]="'w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all ' + (hasFieldError('maxTicketAmount') ? 'border-red-300 bg-red-50' : 'border-gray-300')" min="1" />
+          @if (hasFieldError('maxTicketAmount')) { <div class="text-sm text-red-600 mt-1">{{ getFieldError('maxTicketAmount') }}</div> }
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Status</label>
+          <select formControlName="status" [class]="'w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all ' + (hasFieldError('status') ? 'border-red-300 bg-red-50' : 'border-gray-300')">
+            <option value="draft">Entwurf</option>
+            <option value="published">Veröffentlicht</option>
+            <option value="canceled">Abgesagt</option>
+          </select>
+          @if (hasFieldError('status')) { <div class="text-sm text-red-600 mt-1">{{ getFieldError('status') }}</div> }
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Beschreibung</label>
+        <textarea formControlName="description" rows="4" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all" placeholder="Optional: Details zum Event"></textarea>
+      </div>
+
+      <div class="flex justify-end">
+        <button type="submit" class="inline-flex items-center bg-emerald-600 hover:bg-emerald-700 text-white font-medium px-4 py-2 rounded-lg transition-colors" [disabled]="saving || form.invalid">
+          @if (!saving) { <ng-icon name="matSave" size="18" class="mr-2"></ng-icon> }
+          @if (saving) { <ng-icon name="matSync" size="18" class="mr-2 animate-spin"></ng-icon> }
+          {{ saving ? 'Speichern...' : 'Event erstellen' }}
+        </button>
+      </div>
+    </form>
+  </main>
+</div>

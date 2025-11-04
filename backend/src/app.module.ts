@@ -5,7 +5,8 @@ import { AuthModule } from './auth/auth.module';
 import { DatabaseModule } from './database/database.module';
 import { EventsModule } from './events/events.module';
 import { TicketsModule } from './tickets/tickets.module';
-import { dataBaseConfig } from './database.config';
+import { dataBaseConfig } from './database/database.config';
+import { JobsModule } from './jobs/jobs.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { dataBaseConfig } from './database.config';
     DatabaseModule,
     EventsModule,
     TicketsModule,
+    JobsModule,
   ],
   controllers: [],
   providers: [],

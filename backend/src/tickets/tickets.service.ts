@@ -16,11 +16,12 @@ export class TicketsService {
   ) {}
 
   async create(dto: CreateTicketDto): Promise<Ticket> {
-    const event = await this.eventModel.findByPk(dto.eventId);
-    if (!event) throw new NotFoundException('Event not found');
-
-    const user = await this.userModel.findByPk(dto.userId);
-    if (!user) throw new NotFoundException('User not found');
+    const [event, user] = await Promise.all([
+      this.eventModel.findByPk(dto.eventId),
+      this.userModel.findByPk(dto.userId),
+    ]);
+    if (!event) throw new NotFoundException('Event nicht gefunden');
+    if (!user) throw new NotFoundException('Benutzer nicht gefunden');
 
     const data: Partial<Ticket> = {
       eventId: dto.eventId,
@@ -31,7 +32,7 @@ export class TicketsService {
     if (dto.usedAt) {
       const usedAtDate = new Date(dto.usedAt);
       if (isNaN(usedAtDate.getTime())) {
-        throw new BadRequestException('Invalid usedAt date');
+        throw new BadRequestException('Ungültiges Datum für "usedAt"');
       }
       (data as any).usedAt = usedAtDate;
     }
@@ -48,13 +49,13 @@ export class TicketsService {
 
   async findOne(id: number): Promise<Ticket> {
     const ticket = await this.ticketModel.findByPk(id, { include: [Event, User] });
-    if (!ticket) throw new NotFoundException('Ticket not found');
+    if (!ticket) throw new NotFoundException('Ticket nicht gefunden');
     return ticket;
   }
 
   async findByUuid(uuid: string): Promise<Ticket> {
     const ticket = await this.ticketModel.findOne({ where: { uuid }, include: [Event, User] });
-    if (!ticket) throw new NotFoundException('Ticket not found');
+    if (!ticket) throw new NotFoundException('Ticket nicht gefunden');
     return ticket;
   }
 
@@ -77,13 +78,13 @@ export class TicketsService {
 
     if (dto.eventId !== undefined) {
       const event = await this.eventModel.findByPk(dto.eventId);
-      if (!event) throw new NotFoundException('Event not found');
+      if (!event) throw new NotFoundException('Event nicht gefunden');
       (updateData as any).eventId = dto.eventId;
     }
 
     if (dto.userId !== undefined) {
       const user = await this.userModel.findByPk(dto.userId);
-      if (!user) throw new NotFoundException('User not found');
+      if (!user) throw new NotFoundException('Benutzer nicht gefunden');
       (updateData as any).userId = dto.userId;
     }
 
@@ -94,7 +95,7 @@ export class TicketsService {
     if (dto.usedAt !== undefined) {
       const usedAtDate = dto.usedAt ? new Date(dto.usedAt) : null;
       if (dto.usedAt && usedAtDate && isNaN(usedAtDate.getTime())) {
-        throw new BadRequestException('Invalid usedAt date');
+        throw new BadRequestException('Ungültiges Datum für "usedAt"');
       }
       (updateData as any).usedAt = usedAtDate as any;
     }

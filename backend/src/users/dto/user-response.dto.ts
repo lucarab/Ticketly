@@ -23,11 +23,3 @@ export class UserResponseDto {
   @ApiProperty({ description: 'Letzte Aktualisierung', example: '2025-01-20T10:20:00.000Z' })
   updatedAt: Date;
 }
-
-export class LoginResponseDto {
-  @ApiProperty({ description: 'Benutzerdaten des eingeloggten Nutzers' })
-  user: UserResponseDto;
-
-  @ApiProperty({ description: 'JWT Zugriffstoken', example: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...' })
-  access_token: string;
-}

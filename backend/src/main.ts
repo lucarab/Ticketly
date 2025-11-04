@@ -12,7 +12,7 @@ async function bootstrap() {
   const config = new DocumentBuilder()
     .setTitle('Ticketly API')
     .setDescription('API Dokumentation für Ticketly')
-    .setVersion('1.1')
+    .setVersion('1.4')
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);

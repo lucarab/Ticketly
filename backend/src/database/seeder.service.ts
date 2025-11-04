@@ -1,6 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { User, UserRole } from '../users/entities/user.entity';
+import { Event, EventStatus } from '../events/entities/event.entity';
+import { Ticket, TicketStatus } from '../tickets/entities/ticket.entity';
 
 @Injectable()
 export class SeederService {
@@ -9,11 +11,15 @@ export class SeederService {
   constructor(
     @InjectModel(User)
     private userModel: typeof User,
+    @InjectModel(Event)
+    private eventModel: typeof Event,
+    @InjectModel(Ticket)
+    private ticketModel: typeof Ticket,
   ) {}
 
   async seedDefaultUsers(): Promise<void> {
     try {
-      this.logger.log('Starting database seeding...');
+      this.logger.log('Datenbank-Seeding beginnt...');
 
       const defaultUsers = [
         {
@@ -46,15 +52,48 @@ export class SeederService {
 
         if (!existingUser) {
           await this.userModel.create(userData as any);
-          this.logger.log(`Created default user: ${userData.email}`);
+          this.logger.log(`Benutzer erstellt: ${userData.email}`);
         } else {
-          this.logger.log(`User already exists: ${userData.email}`);
+          this.logger.log(`Benutzer existiert bereits: ${userData.email}`);
         }
       }
 
-      this.logger.log('Database seeding completed successfully');
+      const exampleEventData = {
+        name: 'DHBW Demo Konzert',
+        location: 'Aula',
+        datetime: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000),
+        price: 29.9,
+        maxTicketAmount: 500,
+        description: 'Willkommen zum DHBW-Demo-Konzert!',
+        status: EventStatus.PUBLISHED,
+      } as Partial<Event>;
+
+      const existingEvent = await this.eventModel.findOne({ where: { name: exampleEventData.name } });
+      const event = existingEvent ?? await this.eventModel.create(exampleEventData as any);
+      if (!existingEvent) {
+        this.logger.log(`Beispiel-Event erstellt: ${event.name}`);
+      } else {
+        this.logger.log(`Beispiel-Event existiert bereits: ${existingEvent.name}`);
+      }
+
+      const demoUser = await this.userModel.findOne({ where: { email: 'user@ticketly.com' } });
+      if (demoUser) {
+        const existingTicket = await this.ticketModel.findOne({ where: { userId: demoUser.id, eventId: event.id } });
+        if (!existingTicket) {
+          await this.ticketModel.create({
+            eventId: event.id,
+            userId: demoUser.id,
+            status: TicketStatus.ACTIVE,
+          } as any);
+          this.logger.log(`Demo-Ticket erstellt für Benutzer ${demoUser.email} zu Event ${event.name}`);
+        } else {
+          this.logger.log(`Demo-Ticket existiert bereits für Benutzer ${demoUser.email} zu Event ${event.name}`);
+        }
+      }
+
+      this.logger.log('Datenbank-Seeding erfolgreich');
     } catch (error) {
-      this.logger.error('Error during database seeding:', error);
+      this.logger.error('Fehler beim Datenbank-Seeding:', error);
       throw error;
     }
   }

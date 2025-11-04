@@ -8,14 +8,14 @@ export class EventResponseDto {
   @ApiProperty({ description: 'Name des Events', example: 'Tech Conference 2025' })
   name: string;
 
-  @ApiProperty({ description: 'Veranstaltungsort', example: 'Berlin, City Hall' })
+  @ApiProperty({ description: 'Veranstaltungsort', example: 'Berlin, Stadthalle' })
   location: string;
 
   @ApiProperty({ description: 'Datum und Uhrzeit', example: '2025-06-15T09:00:00.000Z', format: 'date-time' })
   datetime: Date;
 
-  @ApiProperty({ description: 'Preis (Dezimal als String)', example: '49.99' })
-  price: string;
+  @ApiProperty({ description: 'Preis', example: 49.99 })
+  price: number;
 
   @ApiProperty({ description: 'Maximale Anzahl an Tickets', example: 250 })
   maxTicketAmount: number;
