@@ -6,7 +6,7 @@ import { NgIcon, provideIcons } from '@ng-icons/core';
 import { DashboardNavbarComponent } from '../../shared/dashboard-navbar/dashboard-navbar';
 import { AuthService } from '../../auth/auth.service';
 import { UserResponse } from '../../auth/auth.interface';
-import { matSettings } from '@ng-icons/material-icons/baseline';
+import { matSettings, matArrowBack } from '@ng-icons/material-icons/baseline';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -16,7 +16,8 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './options.component.html',
   providers: [
     provideIcons({
-      matSettings
+      matSettings,
+      matArrowBack
     })
   ]
 })

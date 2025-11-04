@@ -5,6 +5,8 @@ import { UpdateTicketDto } from './dto/update-ticket.dto';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { ApiTags, ApiBearerAuth, ApiOperation, ApiParam, ApiBody, ApiOkResponse, ApiCreatedResponse, ApiUnauthorizedResponse, ApiNotFoundResponse, ApiBadRequestResponse } from '@nestjs/swagger';
 import { TicketResponseDto } from './dto/ticket-response.dto';
+import { ScanTicketDto } from './dto/scan-ticket.dto';
+import { ScanTicketResponseDto } from './dto/scan-ticket-response.dto';
 
 @ApiTags('Tickets')
 @ApiBearerAuth()
@@ -61,5 +63,14 @@ export class TicketsController {
   @ApiUnauthorizedResponse({ description: 'Nicht autorisiert' })
   remove(@Param('id', ParseIntPipe) id: number) {
     return this.ticketsService.remove(id);
+  }
+
+  @Post('scan')
+  @ApiOperation({ summary: 'Ticket per UUID scannen und validieren' })
+  @ApiBody({ type: ScanTicketDto })
+  @ApiOkResponse({ description: 'Scan Ergebnis', type: ScanTicketResponseDto })
+  @ApiUnauthorizedResponse({ description: 'Nicht autorisiert' })
+  scan(@Body() dto: ScanTicketDto) {
+    return this.ticketsService.scanByUuid(dto.uuid);
   }
 }

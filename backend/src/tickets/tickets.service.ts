@@ -5,6 +5,7 @@ import { CreateTicketDto } from './dto/create-ticket.dto';
 import { UpdateTicketDto } from './dto/update-ticket.dto';
 import { Event } from '../events/entities/event.entity';
 import { User } from '../users/entities/user.entity';
+import { TicketStatus } from './entities/ticket.entity';
 
 @Injectable()
 export class TicketsService {
@@ -49,6 +50,24 @@ export class TicketsService {
     const ticket = await this.ticketModel.findByPk(id, { include: [Event, User] });
     if (!ticket) throw new NotFoundException('Ticket not found');
     return ticket;
+  }
+
+  async findByUuid(uuid: string): Promise<Ticket> {
+    const ticket = await this.ticketModel.findOne({ where: { uuid }, include: [Event, User] });
+    if (!ticket) throw new NotFoundException('Ticket not found');
+    return ticket;
+  }
+
+  async scanByUuid(uuid: string): Promise<{ valid: boolean; reason?: string; ticket?: Ticket }> {
+    const ticket = await this.ticketModel.findOne({ where: { uuid } });
+    if (!ticket) {
+      return { valid: false, reason: 'not_found' };
+    }
+    if (ticket.status === TicketStatus.USED) {
+      return { valid: false, reason: 'already_used', ticket };
+    }
+    await ticket.update({ status: TicketStatus.USED, usedAt: new Date() });
+    return { valid: true, ticket };
   }
 
   async update(id: number, dto: UpdateTicketDto): Promise<Ticket> {

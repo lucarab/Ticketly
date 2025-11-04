@@ -13,7 +13,7 @@ import {
   matLogout,
   matPerson,
   matEvent,
-  matAnalytics,
+  matQrCodeScanner,
   matSettings,
   matLocalActivity,
   matBarChart
@@ -29,7 +29,7 @@ import {
       matLogout,
       matPerson,
       matEvent,
-      matAnalytics,
+      matQrCodeScanner,
       matSettings,
       matLocalActivity,
       matBarChart

@@ -38,5 +38,32 @@ export const routes: Routes = [
     path: 'dash/events/edit/:id',
     loadComponent: () => import('./dashboard/events/edit-event.component').then(m => m.EditEventComponent),
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'dash/tickets',
+    loadComponent: () => import('./dashboard/tickets/tickets-list.component').then(m => m.TicketsListComponent),
+    canActivate: [AuthGuard]
+  }
+  ,
+  {
+    path: 'dash/tickets/new',
+    loadComponent: () => import('./dashboard/tickets/new-ticket.component').then(m => m.NewTicketComponent),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'dash/tickets/edit/:id',
+    loadComponent: () => import('./dashboard/tickets/edit-ticket.component').then(m => m.EditTicketComponent),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'dash/tickets/qr/:id',
+    loadComponent: () => import('./dashboard/tickets/ticket-qr.component').then(m => m.TicketQrComponent),
+    canActivate: [AuthGuard]
+  }
+  ,
+  {
+    path: 'dash/tickets/scanner',
+    loadComponent: () => import('./dashboard/tickets/ticket-scanner.component').then(m => m.TicketScannerComponent),
+    canActivate: [AuthGuard]
   }
 ];
