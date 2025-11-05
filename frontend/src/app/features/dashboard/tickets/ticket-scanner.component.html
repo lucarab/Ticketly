@@ -23,7 +23,7 @@
             @if (scanning()) {
               <span class="inline-flex items-center">
                 <ng-icon class="animate-spin mr-2" name="matSync" size="18" />
-                Kamera aktiv.Scanne QR-Code…
+                Kamera aktiv. Scanne QR-Code…
               </span>
             }
             @if (!scanning() && resultValid() === null) { <span>Kamera inaktiv.</span> }

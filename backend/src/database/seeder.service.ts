@@ -1,8 +1,8 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { User, UserRole } from '../users/entities/user.entity';
-import { Event, EventStatus } from '../events/entities/event.entity';
-import { Ticket, TicketStatus } from '../tickets/entities/ticket.entity';
+import { User, UserRole } from '../features/users/entities/user.entity';
+import { Event, EventStatus } from '../features/events/entities/event.entity';
+import { Ticket, TicketStatus } from '../features/tickets/entities/ticket.entity';
 
 @Injectable()
 export class SeederService {
